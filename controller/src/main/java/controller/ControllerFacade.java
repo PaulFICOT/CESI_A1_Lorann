@@ -18,7 +18,7 @@ public class ControllerFacade implements IController {
     /** The view. */
     private final IView  view;
 
-    /** The model. */
+    /*      * The model. */
     private final IModel model;
 
     /**
