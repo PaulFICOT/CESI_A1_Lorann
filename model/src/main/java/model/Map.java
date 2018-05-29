@@ -1,5 +1,5 @@
-
-public class Map {
+ 
+public class Map implements IEntitie, IElement, IParticule extends Game{
 
 	private int score;
 	

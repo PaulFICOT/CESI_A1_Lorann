@@ -1,6 +1,6 @@
-package model;
+package model; 
 
-public class Particule {
+public class Particule extends Map {
 	
 	private int life;
 	

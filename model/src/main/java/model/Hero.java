@@ -1,5 +1,5 @@
 package model;
-
+ 
 public class Hero {
 	
 	private boolean stateSpell;

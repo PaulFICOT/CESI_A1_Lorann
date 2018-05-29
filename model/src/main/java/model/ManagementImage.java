@@ -1,6 +1,6 @@
-package model;
+package model; 
 
-public class ManagementImage {
+public class ManagementImage extends Game{
 
 	private HasMap<Integer,Image> imageElements;
 	

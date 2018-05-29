@@ -1,6 +1,6 @@
 package model;
-
-public class Entitie extends Hero, Monster {
+ 
+public class Entitie extends Hero, Monster,TypeEntitie {
 
 	private int x;
 	
@@ -9,7 +9,7 @@ public class Entitie extends Hero, Monster {
 	private Image image;
 	
 	public void Entitie(image Image) {
-		
+		 
 	}
 	
 	public void setPosition(int x, int y) {

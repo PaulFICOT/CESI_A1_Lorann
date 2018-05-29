@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public interface IElement{
+public interface IElement extends Map {
 	
 	void getPermeability();
 	

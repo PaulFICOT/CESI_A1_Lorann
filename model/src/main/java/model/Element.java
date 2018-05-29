@@ -1,6 +1,6 @@
 package model;
-
-public class Element extends Door {
+ 
+public class Element extends Door, Map {
 
 	private Image image;
 	

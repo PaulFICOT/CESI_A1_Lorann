@@ -1,9 +1,9 @@
 package model;
-
+ 
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class Game extends Observable {
+public class Game implements IModel, Observable{
 
 	int idActual;
 	

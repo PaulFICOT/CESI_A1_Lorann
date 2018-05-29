@@ -1,6 +1,6 @@
 package model;
-
-public enum  {
+ 
+public enum  extends Element {
 	DOOR;
 	WALL;
 	BONUS;

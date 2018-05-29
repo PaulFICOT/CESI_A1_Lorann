@@ -1,7 +1,7 @@
 package model;
 
-public enum TypeEntitie {
-	
+public enum TypeEntitie extends Entitie {
+	 
 	HERO;
 	MONSTER;
 	BONUS;

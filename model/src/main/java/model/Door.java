@@ -1,5 +1,5 @@
 package model;
-
+ 
 public class Door {
 	
 	private boolean state;

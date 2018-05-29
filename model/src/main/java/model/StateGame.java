@@ -1,5 +1,5 @@
 package model;
 
-public enum StateGame {
-	
+public enum StateGame implements Game {
+	 
 }
