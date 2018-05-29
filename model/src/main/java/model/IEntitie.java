@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public interface IEntitie{
+public interface IEntitie extends IEntitie, Map{
 	
 	void draw(Graphics graphics);
 	

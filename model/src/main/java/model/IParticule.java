@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public interface IParticule{
+public interface IParticule extends Particule, Map{
 	
 	void graphics(Graphics graphics);
 	
