@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class Game implements IElement {
+public class Game implements IElement, IParticule {
 
 	@Override
 	public void getPermeability() {
