@@ -1,7 +1,9 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * <h1>The Interface IModel.</h1>
@@ -10,7 +12,23 @@ import java.util.List;
  * @version 1.0
  */
 public interface IModel {
-
+	
+	void getMessage();
+	void addMobile(IMobile mobile);
+	Observable getObservable();
+	int getX();
+	void setX(int x);
+	int getLvl();
+	void createMap(int lvl) throws SQLException;
+	void refresh();
+	
+	void launchSpell();
+	
+	void move(char c) throws IOException, SQLException;
+	List<IElement> getImages() throws SQLException;
+	List<IMobile> getMobile() throws SQLException;
+	Permeability checkBump(int x, int y);
+	
     /**
      * Gets the example by id.
      *
@@ -20,7 +38,7 @@ public interface IModel {
      * @throws SQLException
      *             the SQL exception
      */
-    Example getExampleById(int id) throws SQLException;
+    //Example getExampleById(int id) throws SQLException;
 
     /**
      * Gets the example by name.
@@ -31,7 +49,7 @@ public interface IModel {
      * @throws SQLException
      *             the SQL exception
      */
-    Example getExampleByName(String name) throws SQLException;
+    //Example getExampleByName(String name) throws SQLException;
 
     /**
      * Gets the all examples.
@@ -40,5 +58,13 @@ public interface IModel {
      * @throws SQLException
      *             the SQL exception
      */
-    List<Example> getAllExamples() throws SQLException;
+    //List<Example> getAllExamples() throws SQLException;
+    
+	/*IElement getElement(int x, int y);
+	void addObserver(Observer observer);
+	void changed();
+	void getGameOver(Graphics graphics);
+	void getMenu(Graphics graphics);*/
+	
+	//void addParticule(int life, StateHero state, IEntitie hero);
 }

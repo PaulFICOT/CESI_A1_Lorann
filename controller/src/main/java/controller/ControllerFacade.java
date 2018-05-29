@@ -40,7 +40,9 @@ public class ControllerFacade implements IController {
      *
      * @throws SQLException
      *             the SQL exception
+   
      */
+    /*
     public void start() throws SQLException {
         this.getView().displayMessage(this.getModel().getExampleById(1).toString());
 
@@ -53,7 +55,7 @@ public class ControllerFacade implements IController {
             message.append('\n');
         }
         this.getView().displayMessage(message.toString());
-    }
+    }*/
 
     /**
      * Gets the view.
