@@ -14,20 +14,24 @@ import java.util.Observable;
 public interface IModel {
 	
 	void getMessage();
-	void addMobile(IMobile mobile);
+	void addArmobile(IMobile mobile);
 	Observable getObservable();
 	int getX();
 	void setX(int x);
 	int getLvl();
 	void createMap(int lvl) throws SQLException;
-	void refresh();
-	
+	 public void refresh();
+
 	void launchSpell();
-	
+
+
 	void move(char c) throws IOException, SQLException;
-	List<IElement> getImages() throws SQLException;
-	List<IMobile> getMobile() throws SQLException;
-	Permeability checkBump(int x, int y);
+
+	List<IElement> getArimages() throws SQLException;
+
+	List<IMobile> getArmobile() throws SQLException;
+
+Permeability checkBump(int x, int y);
 	
     /**
      * Gets the example by id.

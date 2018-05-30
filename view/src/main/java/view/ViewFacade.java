@@ -6,59 +6,22 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import controller.ControllerOrder;
+import controller.IController;
 import model.IElement;
 import model.IMobile;
 import model.IModel;
 
+public class ViewFacade implements IView, Runnable {
 
-
-/**
- * <h1>The Class ViewFacade provides a facade of the View component.</h1>
- *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
- */
-public class ViewFacade implements IView, Runnable{
-
-	private View view;
+	private final View view;
 	
-    public ViewFacade(final IModel model) {
-        this.view = new View(model);
-        SwingUtilities.invokeLater(this);
-    }
-    
-
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		this.view.setVisible(true);
-	}
-
-
-
-	@Override
-	public List<IMobile> getMobile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public List<IElement> getImages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+	public ViewFacade(IModel model) {
+		this.view = new View(model);
+		SwingUtilities.invokeLater(this);
 	}
 
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) { //KeyEvent which get back the enter
-		
+			
 		switch (keyCode) {
 		case KeyEvent.VK_NUMPAD6: //NUMPAD mean the number at the right of the keyboard
 			return ControllerOrder.Right;
@@ -88,9 +51,53 @@ public class ViewFacade implements IView, Runnable{
 			return ControllerOrder.Spell;
 		}
 		return null;
-}
-    /*
-     * (non-Javadoc)
-     * @see view.IView#displayMessage(java.lang.String)
-     */
+	}
+
+
+	public void printMessage(final String message) {
+		this.view.printMessage(message);
+	}
+
+	public void run() {
+		this.view.setVisible(true);
+	}
+
+
+	public void setController(final IController controller) {
+		this.view.setController(controller);
+	}
+
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<IMobile> getArmobile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<IElement> getArimages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addArmobile(IMobile mobile) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IMobile> getMobile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<IElement> getImages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

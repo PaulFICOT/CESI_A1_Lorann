@@ -1,16 +1,20 @@
 package model;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.lang.model.element.TypeElement;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public interface IElement {
 	
-	void getPermeability();
-	void draw(Graphics graphics);
-	TypeElement getTypeElement();
-	void setImage(Image image);
 	int getX();
 	int getY();
+	void setX( int x);
+	void setY(int y);
+	String getName();
+	Permeability getPerm();
+	BufferedImage Image() throws IOException;
+	void move(char c) throws IOException, SQLException;
+	List<IElement> getArimages();
+	
 }

@@ -14,39 +14,78 @@ import javax.swing.JOptionPane;
 import controller.IController;
 import model.IModel;
 
-public class View extends JFrame implements KeyListener {
-
-	private View view;
-	private IModel model;
-	private IController controller;
+class View extends JFrame implements KeyListener {
 	
-	public View(IModel model) throws HeadlessException{
-		this.buildView(model);
+	private ViewFacade viewFacade;
+	private IModel	model;
+	private IController	controller;
+	private static final long	serialVersionUID	= -697358409737458175L;
+
+
+	public View(final IModel model) throws HeadlessException {
+		this.buildViewFrame(model);
 	}
-	
-
 
 	public View(final IModel model, final GraphicsConfiguration gc) {
 		super(gc);
-		this.buildView(model);
+		this.buildViewFrame(model);
 	}
-	
+
+	public View(final IModel model, final String title) throws HeadlessException {
+		super(title);
+		this.buildViewFrame(model);
+	}
+
+
 	public View(final IModel model, final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
-		this.buildView(model);
-	} 
-
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		this.buildViewFrame(model);
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		//this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+	public IController getController() {
+		return this.controller;
+	}
+
+
+	protected void setController(final IController controller) {
+		this.controller = controller;
+	}
+
+
+	protected IModel getModel() {
+		return this.model;
+	}
+
+
+	private void setModel(final IModel model) {
+		this.model = model;
+	}
+
+
+	private void buildViewFrame(final IModel model) { //The principal window
+		this.setModel(model);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.addKeyListener(this);
+		this.setContentPane(new Panel(this));
+		this.setTitle("LorannProject");
+		//this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(704, 448);
+		this.setBackground(Color.BLACK);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+
+	public void printMessage(final String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
+
+	public void keyTyped(final KeyEvent e) {
+
+	}
+
+
+	public void keyPressed(final KeyEvent e) {
 		try {
 			this.getController().orderPerform(ViewFacade.keyCodeToControllerOrder(e.getKeyCode()));
 		} catch (IOException e1) {
@@ -58,44 +97,8 @@ public class View extends JFrame implements KeyListener {
 		}
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void buildView(final IModel model) {
-		this.setModel(model);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.addKeyListener(this);
-		this.setContentPane(new Panel(this));
-		this.setTitle("LorannProject | Dhennin Briaux Maniez Ficot");
-		this.setSize(640, 384);
-		this.setBackground(Color.BLACK);
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-	
-	private void setModel(IModel model) {
-		// TODO Auto-generated method stub
-		this.model = model;
-	}
+	public void keyReleased(final KeyEvent e) {
 
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
-	}
-	
-	public IModel getModel() {
-		return this.model; //Retourner le modèle quand celui ci sera implémenté
-	}
-	
-	public IController getController() {
-		return this.controller;
-	}
-
-	public void setController(IController controller2) {
-		// TODO Auto-generated method stub
-		this.view.setController(controller);
-	}
 }
+}
+

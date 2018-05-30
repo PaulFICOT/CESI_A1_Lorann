@@ -186,7 +186,7 @@ public class BoardFrame extends JFrame implements IBoard {
 
     /**
      * Sets the height looped.
-     *
+     *get
      * @param heightLooped
      *            the new height looped
      */

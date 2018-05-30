@@ -3,61 +3,34 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
+import model.IElement;
 import model.IEntitie;
+import model.IMobile;
 import model.IModel;
 import view.IView;
 
 public class Controller	implements IController{
 
-	Thread thread = new Thread();
+	private IView view;
+	private IModel model;
 	private char c;
-	
-	public void Controller(IView view, IModel model) {
-		
+
+	public Controller(final IView view, final IModel model) { // Controller
+																// constructor
+		this.setView(view);
+		this.setModel(model);
+	}
+
+	private void setView(final IView view) {
+		this.view = view;
+	}
+
+	private void setModel(final IModel model) {
+		this.model = model;
 	}
 	
-	public void initPathFinder() {
-		
-	}
-	
-	public void startTick() {
-		
-	}
-	
-	public void update() {
-		
-	}
-	
-	public void setView(IView view) {
-		
-	}
-	
-	public void setModel(IModel model) {
-		
-	}
-	
-	public IView getView() {
-		return null;
-	}
-	
-	public IModel getModel() {
-		return null;
-	}
-	
-	/*public IElement getElement(int x, int y) {
-		
-	}*/
-	public boolean isBlocked(int x, int y) {
-		return false;	
-	}
-	
-	public void keyEvent(KeyEvent event) {
-		
-	}
-	public void move(int action, IEntitie entitie) {
-		
-	}
 	public void orderPerform(final ControllerOrder controllerOrder) throws IOException, SQLException { //Get back the enter from the View before send the char to the Model
 		switch (controllerOrder) {
 		
@@ -108,5 +81,46 @@ public class Controller	implements IController{
 		default:
 			break;
 		}
+	}
+
+	public void getMap1() throws SQLException {
+	}
+
+	public List<IMobile> getArmobile(){
+		
+		return null;
+	}
+	public void printMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<IElement> getArimages(){
+		// TODO Auto-generated method stub
+		return null;
 }
+
+	@Override
+	public void getMap() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IElement> getImages() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IMobile> getMobile() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
