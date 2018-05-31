@@ -17,7 +17,7 @@ public interface IMobile {
 	void setX(int x);
 	void setY(int y);
 	
-	//Permeability getPermeability();
+	Permeability getPerm();
 	
 	BufferedImage Image() throws IOException;
 	String getName();

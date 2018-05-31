@@ -1,12 +1,17 @@
 package main;
 
-import model.IModel;
-import model.Model;
+import java.sql.SQLException;
+
+import controller.Controller;
+import model.dao.Model;
 import view.ViewFacade;
 
 public abstract class Main {
-	public static void main(final String[] args) {
-    	final Model model = new Model();
-    	final ViewFacade view = new ViewFacade(model);
+	public static void main(final String[] args) throws SQLException {
+		final Model model = new Model();
+		model.createMap(model.LevelSelection() + 1);
+		final ViewFacade view = new ViewFacade(model);
+		final Controller controller = new Controller(view, model);
+		view.setController(controller);
     }
 }
