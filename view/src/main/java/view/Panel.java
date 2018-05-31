@@ -103,6 +103,7 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 
 			for (IMobile obj : Armobile) {
 
+				
 				int x = obj.getX();
 				int y = obj.getY();
 				graphics.drawImage(obj.Image(), x * pixelNumbers, y * pixelNumbers, this);

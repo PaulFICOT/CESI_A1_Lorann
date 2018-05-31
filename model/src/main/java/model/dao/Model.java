@@ -1,7 +1,10 @@
 package model.dao;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -276,35 +279,35 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 			for (y = 0; y < 14; y++) {
 				char symbol = co.checkMap(x, y, lvl);
 				switch (symbol) {
-				case '+':
+				case '|':
 					VBone vbone = new VBone(x, y);
 					Arimages.add((IElement) vbone); // add() is a method that adds an
 											// element on the ArrayList called
 											// here "Arimage"
 					break;
 
-				case '-':
+				case '_':
 					HBone hbone = new HBone(x, y);
 					Arimages.add((IElement) hbone); // add() is a method that adds an
 											// element on the ArrayList called
 											// here "Arimage"
 					break;
 
-				case '#':
+				case 'O':
 					Corners corner = new Corners(x, y);
 					Arimages.add((IElement) corner); // add() is a method that adds an
 											// element on the ArrayList called
 											// here "Arimage"
 					break;
 
-				case 'x':
+				case 'B':
 					Purse purse = new Purse(x, y);
 					Arimages.add((IElement) purse); // add() is a method that adds an
 											// element on the ArrayList called
 											// here "Arimage"
 					break;
 
-				case 'o':
+				case 'E':
 					CrystalBall crystal = new CrystalBall(x, y);
 					Arimages.add((IElement) crystal); // add() is a method that adds an
 											// element on the ArrayList called
@@ -318,7 +321,7 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 											// here "Arimage"
 					break;
 
-				case '$':
+				case 'C':
 					DoorC doorC = new DoorC(x, y);
 					Arimages.add((IElement) doorC); // add() is a method that adds an
 											// element on the ArrayList called
@@ -351,4 +354,59 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 		return null;
 	}
 
+	public void contentMap() {
+		
+	}
+	
+	public void createMapTxt(int lvl) throws IOException{	
+		String fileName = "Map"+lvl+".txt";
+		String temp;
+		
+		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+		String line;
+		int y = 0, i = 0;
+		line = buffer.readLine();
+		
+		while(line != null) {
+			for(int x = 0; x < 22; x++) {
+				if(line == "|") {
+				VBone vbone = new VBone(x, y);
+				Arimages.add((IElement) vbone);
+				}
+					if(line =="_") {
+						HBone hbone = new HBone(x, y);
+						Arimages.add((IElement) hbone);
+					}
+						if(line == "O") {
+							Corners corner = new Corners(x, y);
+							Arimages.add((IElement) corner);
+						}
+							if(line =="B") {
+								Purse purse = new Purse(x, y);
+								Arimages.add((IElement) purse);
+							}
+								if(line =="E") {
+									CrystalBall crystal = new CrystalBall(x, y);
+									Arimages.add((IElement) crystal);
+								}
+									if(line == "@") {
+										DoorO doorO = new DoorO(x, y);
+										Arimages.add((IElement) doorO);
+									}
+										if(line =="C") {
+											DoorC doorC = new DoorC(x, y);
+											Arimages.add((IElement) doorC); 
+										}
+											if(line =="") {
+												Black black = new Black(x, y);
+												Arimages.add((IElement) black);
+											}			
+				}
+			line = buffer.readLine();
+			y++;
+		}
+	buffer.close();	
+	}
 }
+
+
