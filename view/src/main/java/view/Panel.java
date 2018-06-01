@@ -17,11 +17,6 @@ import javax.swing.Timer;
 import model.IElement;
 import model.IMobile;
 
-/**
- * The Class ViewPanel.
- *
- * @author Jean-Aymeric Diet
- */
 class Panel extends JPanel implements Observer, ActionListener, IView {
 	/** The view frame. */
 	private View view;
@@ -94,27 +89,19 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 		}
 		try {
 			for (IElement obj : Arimages) { 
-
 				int x = obj.getX();
 				int y = obj.getY();
 				graphics.drawImage(obj.Image(), x * pixelNumbers, y * pixelNumbers, this);
-
 			}
-
-			for (IMobile obj : Armobile) {
-
-				
+			for (IMobile obj : Armobile) {	
 				int x = obj.getX();
 				int y = obj.getY();
 				graphics.drawImage(obj.Image(), x * pixelNumbers, y * pixelNumbers, this);
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-	}
-	
+	}	
 	/* Method to repaint the elements of the ArrayList */
 	
 	public void actionPerformed(ActionEvent e) {

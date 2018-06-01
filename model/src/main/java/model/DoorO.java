@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class DoorO {
+public class DoorO extends Background {
 
 	private int x;
 	private int y;

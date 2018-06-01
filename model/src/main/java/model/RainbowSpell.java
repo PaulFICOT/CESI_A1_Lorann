@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class RainbowSpell implements IElement {
+public class RainbowSpell extends Mobile implements IElement {
 	private int x;
 	private int y;
 	private char c;
@@ -60,27 +60,27 @@ public class RainbowSpell implements IElement {
 	// Bufferring of the different images of the RainbowSpell
 	
 	public BufferedImage Image1() throws IOException {
-		BufferedImage image = ImageIO.read(new File("src/main/resources/sprite/fireball_1.png"));
+		BufferedImage image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\fireball_1.png"));
 		return image;
 	}
 
 	public BufferedImage Image2() throws IOException {
-		BufferedImage image = ImageIO.read(new File("src/main/resources/sprite/fireball_2.png"));
+		BufferedImage image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\fireball_2.png"));
 		return image;
 	}
 
 	public BufferedImage Image3() throws IOException {
-		BufferedImage image = ImageIO.read(new File("src/main/resources/sprite/fireball_3.png"));
+		BufferedImage image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\fireball_3.png"));
 		return image;
 	}
 
 	public BufferedImage Image4() throws IOException {
-		BufferedImage image = ImageIO.read(new File("src/main/resources/sprite/fireball_4.png"));
+		BufferedImage image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\fireball_4.png"));
 		return image;
 	}
 
 	public BufferedImage Image5() throws IOException {
-		BufferedImage image = ImageIO.read(new File("src/main/resources/sprite/fireball_5.png"));
+		BufferedImage image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\fireball_5.png"));
 		return image;
 	}
 

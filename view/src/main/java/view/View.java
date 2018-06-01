@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -16,7 +15,6 @@ import model.IModel;
 
 class View extends JFrame implements KeyListener {
 	
-	private ViewFacade viewFacade;
 	private IModel	model;
 	private IController	controller;
 	private static final long	serialVersionUID	= -697358409737458175L;
@@ -69,9 +67,8 @@ class View extends JFrame implements KeyListener {
 		this.addKeyListener(this);
 		this.setContentPane(new Panel(this));
 		this.setTitle("LorannProject");
-		//this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
 		this.setSize(704, 448);
-		this.setBackground(Color.BLACK);
+		//this.setBackground(Color.BLACK);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

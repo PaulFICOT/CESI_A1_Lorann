@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class HBone {
+public class HBone extends Background {
 
 	private int x;
 	private int y;
@@ -35,7 +35,7 @@ public class HBone {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage horizontal_bone = ImageIO.read(new File("src/main/resources/sprite/horizontal_bone.png"));
+		BufferedImage horizontal_bone = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\horizontal_bone.png"));
 		return horizontal_bone;
 	}
 

@@ -48,7 +48,7 @@ public class Monster2 extends Mobile{
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage monster_1 = ImageIO.read(new File("src/main/resources/sprite/monster_2.png"));
+		BufferedImage monster_1 = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\monster_2.png"));
 		return monster_1;
 	}
 

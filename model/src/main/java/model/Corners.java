@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class Corners {
+public class Corners extends Background {
 
 	private int x;
 	private int y;
@@ -37,7 +37,7 @@ public class Corners {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage bone = ImageIO.read(new File("src/main/resources/sprite/bone.png"));
+		BufferedImage bone = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\bone.png"));
 		return bone;
 	}
 

@@ -1,5 +1,6 @@
 package model;
 
-public class Mobile {
+public abstract class Mobile extends Element implements IMobile{
 
+	Permeability penetrable;
 }

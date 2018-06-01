@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class VBone {
+public class VBone extends Background {
 
 	private int x;
 	private int y;
@@ -36,7 +36,7 @@ public class VBone {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage vertical_bone = ImageIO.read(new File("src/main/resources/sprite/vertical_bone.png"));
+		BufferedImage vertical_bone = ImageIO.read(new File("C:\\Users\\vince\\git\\Loran\\vertical_bone.png"));
 		return vertical_bone;
 	}
 

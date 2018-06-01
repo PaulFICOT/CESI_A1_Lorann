@@ -18,6 +18,6 @@ public interface IController {
 	void orderPerform(ControllerOrder controllerOrder) throws IOException, SQLException;
 	void getMap() throws SQLException;
 	
-	public List<IElement> getImages() throws SQLException;
-	public List<IMobile> getMobile() throws SQLException;
+	public List<IElement> getArimages() throws SQLException;
+	public List<IMobile> getArmobile() throws SQLException;
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class Purse {
+public class Purse extends Items {
 
 	private int x;
 	private int y;
@@ -37,7 +37,7 @@ public class Purse {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage purse = ImageIO.read(new File("src/main/resources/sprite/purse.png"));
+		BufferedImage purse = ImageIO.read(new File("C:\\Users\\vince\\git\\Loran\\purse.png"));
 		return purse;
 	}
 

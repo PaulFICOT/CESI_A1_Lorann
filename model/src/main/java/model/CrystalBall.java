@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class CrystalBall {
+public class CrystalBall extends Items {
 
 	private int x;
 	private int y;
@@ -42,7 +42,7 @@ public class CrystalBall {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage crystal_ball = ImageIO.read(new File("src/main/resources/sprite/crystal_ball.png"));
+		BufferedImage crystal_ball = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\crystal_ball.png"));
 		return crystal_ball;
 	}
 

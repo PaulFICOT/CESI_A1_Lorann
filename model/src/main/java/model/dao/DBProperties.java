@@ -13,10 +13,10 @@ public class DBProperties extends Properties {
 	private final static String	PROPERTIES_FILE_NAME	= "model.properties";
 
 	/** The url. */
-	private String url = "";
+	private String url = "jdbc:mysql://localhost:3306/lorannproject?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	/** The login. */
-	private String login = "";
+	private String login = "root";
 
 	/** The password. */
 	private String password	= "";

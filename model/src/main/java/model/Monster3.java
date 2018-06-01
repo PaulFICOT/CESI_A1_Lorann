@@ -49,7 +49,7 @@ public class Monster3 extends Mobile{
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage monster_1 = ImageIO.read(new File("src/main/resources/sprite/monster_3.png"));
+		BufferedImage monster_1 = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\monster_3.png"));
 		return monster_1;
 	}
 

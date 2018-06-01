@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import controller.ControllerOrder;
 
-public class Lorann extends Mobile {
+public class Lorann extends Mobile{
 	private int x;
 	private int y;
 	private IModel model;
@@ -35,7 +35,7 @@ public class Lorann extends Mobile {
 		this.y = y;
 
 		try {
-			this.image = ImageIO.read(new File("src/main/resources/sprite/lorann_b.png"));
+			this.image = ImageIO.read(new File("C:\\Users\\vince\\git\\Loran\\lorann_b.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -343,42 +343,42 @@ public class Lorann extends Mobile {
 	}
 
 	public BufferedImage ImageD() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_b.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_b.png"));
 		return image;
 	}
 
 	public BufferedImage ImageDl() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_bl.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_bl.png"));
 		return image;
 	}
 
 	public BufferedImage ImageDr() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_br.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_br.png"));
 		return image;
 	}
 
 	public BufferedImage ImageL() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_l.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_l.png"));
 		return image;
 	}
 
 	public BufferedImage ImageR() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_r.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_r.png"));
 		return image;
 	}
 
 	public BufferedImage ImageU() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_u.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_u.png"));
 		return image;
 	}
 
 	public BufferedImage ImageUl() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_ul.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_ul.png"));
 		return image;
 	}
 
 	public BufferedImage ImageUr() throws IOException {
-		image = ImageIO.read(new File("src/main/resources/sprite/lorann_ur.png"));
+		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_ur.png"));
 		return image;
 	}
 

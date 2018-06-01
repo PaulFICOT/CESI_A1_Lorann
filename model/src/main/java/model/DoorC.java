@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class DoorC {
+public class DoorC extends Background {
 
 	private int x;
 	private int y;
@@ -39,7 +39,7 @@ public class DoorC {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage doorC = ImageIO.read(new File("src/main/resources/sprite/gate_closed.png"));
+		BufferedImage doorC = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\gate_closed.png"));
 		return doorC;
 	}
 

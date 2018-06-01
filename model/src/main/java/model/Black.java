@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class Black {
+public class Black extends Background{
 
 	private int x;
 	private int y;
@@ -38,7 +38,7 @@ public class Black {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage black = ImageIO.read(new File("src/main/resources/sprite/black.png"));
+		BufferedImage black = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\black.png"));
 		return black;
 
 	}
