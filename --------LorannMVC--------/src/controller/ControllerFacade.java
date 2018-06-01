@@ -6,6 +6,7 @@ import contract.controller.IControllerFacade;
 import contract.controller.IOrderPerformer;
 import contract.model.IModelFacade;
 import contract.view.IViewFacade;
+import model.element.mobile.Mobile;
 
 public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 
@@ -132,8 +133,9 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 			if(!this.getModel().getLorann().isAlive()){
 			
 				
-            this.getView().displayMessage("  GAME OVER  \n  Ressucité : " );
+            this.getView().displayMessage("  GAME OVER  \n  Ressuciter : " );
             this.getModel().getLorann().ressucite();
+            Mobile.score=0;
                      
             //this.getView().followMyVehicle();
         }
@@ -143,7 +145,7 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 	          this.clearStackOrder();
       
 		}
-        this.getView().displayMessage(" TU AS GAGNE " );
+        this.getView().displayMessage(" TU AS GAGNE\nTon score : " + Mobile.score );
 	}
 	
     /**

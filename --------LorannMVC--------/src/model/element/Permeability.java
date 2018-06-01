@@ -12,7 +12,9 @@ public enum Permeability {
 	
 	CRYSTAL,
 	
-	GATE,
+	GATEC,
+	
+	GATEO,
 	;
 	
 	

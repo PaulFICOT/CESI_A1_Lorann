@@ -1,6 +1,9 @@
 package model.element.mobile;
 
 import java.awt.Point;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
 
 import contract.model.ILevel;
 import contract.model.IMobile;
@@ -8,7 +11,8 @@ import fr.exia.showboard.IBoard;
 import model.element.Element;
 import model.element.Permeability;
 import model.element.Sprite;
-import model.element.motionless.Gate;
+import model.element.motionless.Gatec;
+import model.element.motionless.Gateo;
 import model.element.motionless.MotionlessElement;
 
 public abstract class Mobile extends Element implements IMobile {
@@ -29,7 +33,7 @@ public abstract class Mobile extends Element implements IMobile {
     /** The board. */
     private IBoard  board;
 
-    private int score;
+    public static int score;
     
     protected Boolean win = false;
     
@@ -64,7 +68,7 @@ public abstract class Mobile extends Element implements IMobile {
      * @param permeability
      *            the permeability
      */
-    Mobile(final int x, final int y, final Sprite sprite, final ILevel level, final Permeability permeability) {
+    protected Mobile(final int x, final int y, final Sprite sprite, final ILevel level, final Permeability permeability) {
         this(sprite, level, permeability);
         this.setX(x);
         this.setY(y);
@@ -81,7 +85,12 @@ public abstract class Mobile extends Element implements IMobile {
         if(isCrashed()){
         	moveDown();
         }
-        Test();
+        try {
+			Test();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     }
     /*
@@ -95,7 +104,12 @@ public abstract class Mobile extends Element implements IMobile {
         if(isCrashed()){
         	moveRight();
         }
-        Test();
+        try {
+			Test();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
     }
@@ -111,7 +125,12 @@ public abstract class Mobile extends Element implements IMobile {
         if(isCrashed()){
         	moveUp();
         }
-        Test();
+        try {
+			Test();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         }
     
@@ -128,7 +147,12 @@ public abstract class Mobile extends Element implements IMobile {
         if(isCrashed()){
         	moveLeft();
         }
-        Test();
+        try {
+			Test();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
@@ -326,11 +350,11 @@ public abstract class Mobile extends Element implements IMobile {
     
     @Override
     public Boolean checkWin() {
-        return this.getLevel().getOnTheLevelXY(this.getX(), this.getY()).getPermeability() == Permeability.GATE;
+        return this.getLevel().getOnTheLevelXY(this.getX(), this.getY()).getPermeability() == Permeability.GATEC;
     
     }
     
-    public void Test(){
+    public void Test() throws IOException{
     	
 
 
@@ -347,8 +371,20 @@ public abstract class Mobile extends Element implements IMobile {
 
         if(isCrystal()){
         	
-        	System.out.println("Tu as  récupéré la clef ");
-
+        	System.out.println("Tu as récupéré la clef ");
+        	
+        	
+        	/*new Element(Gateo.SPRITE, Permeability.GATEC);
+          
+ 
+          Gatec.SPRITE.loadImage();*/
+          //gatec.setSprite(Gatec.SPRITE);
+        	Sprite SPRITE = new Sprite('A', "gate_open.png");
+        	SPRITE.loadImage();
+        	
+        	
+           	this.setSprite(SPRITE);
+  
         	Open();
         	
         	//Gate.setEtat("OPEN");
@@ -364,7 +400,6 @@ public abstract class Mobile extends Element implements IMobile {
         
         if(checkWin()&&open==false){
         	
-        
 
 	       die();
 	    }

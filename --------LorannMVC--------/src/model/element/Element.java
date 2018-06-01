@@ -39,7 +39,7 @@ public class Element implements IElement{
      * @param sprite
      *            the new sprite
      */
-    protected final void setSprite(final Sprite sprite) {
+    public final void setSprite(final Sprite sprite) {
         this.sprite = sprite;
     }
 

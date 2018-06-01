@@ -17,8 +17,10 @@ public abstract class MotionlessElementFactory {
     /** The Constant Crystal. */
     private static final Crystal crystal = new Crystal();
     
-    /** The Constant Gate. */
-    private static final Gate gate = new Gate();
+    /** The Constant Gatec. */
+    private static final Gatec gatec = new Gatec();
+    
+    private static final Gateo gateo = new Gateo();
     
     /** The Constant Tile (black background). */
     private static final Tile tile = new Tile();
@@ -30,9 +32,10 @@ public abstract class MotionlessElementFactory {
             verticalBone,
             purse,
             crystal,
-            gate,
+            gatec,
             tile,
             monstre,
+            gateo,
             };
     
     /**
@@ -85,9 +88,14 @@ public abstract class MotionlessElementFactory {
      *
      * @return the motionless element
      */
-    public static MotionlessElement createGate() {
-        return gate;
+    public static MotionlessElement createGatec() {
+        return gatec;
     }
+    
+    public static MotionlessElement createGateo() {
+        return gateo;
+    }
+    
     
     /**
      * Gets the good MotionlessElement from file symbol.

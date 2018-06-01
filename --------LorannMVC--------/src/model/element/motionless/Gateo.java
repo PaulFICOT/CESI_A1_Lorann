@@ -3,14 +3,14 @@ package model.element.motionless;
 import model.element.Permeability;
 import model.element.Sprite;
 
-public class Crystal extends MotionlessElement {
+public class Gateo extends MotionlessElement {
 	   /** The Constant SPRITE. */
- private static final Sprite SPRITE = new Sprite('X', "crystal_ball.png");
+ public static Sprite SPRITE = new Sprite('C', "gate_open.png");
 
  /**
   * Instantiates a new crystal.
   */
- Crystal() {
-     super(SPRITE, Permeability.CRYSTAL);
+  public Gateo() {
+     super(SPRITE, Permeability.GATEO);
  }
 }
