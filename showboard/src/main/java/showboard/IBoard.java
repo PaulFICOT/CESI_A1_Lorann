@@ -26,7 +26,7 @@ public interface IBoard {
      * @param y
      *            the y
      */
-    void addSquare(ISquare square, int x, int y);
+    void addSquare(ISquare square, int 5, int 5);
 
     /**
      * Adds the pawn.

@@ -19,5 +19,8 @@ public interface ISquare {
      *
      * @return the image
      */
+	
+	Image img = ImageIO.read(new File("lorann_l.png");
+	
     Image getImage();
 }

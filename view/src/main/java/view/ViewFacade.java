@@ -22,7 +22,7 @@ public class ViewFacade implements IView {
      * @see view.IView#displayMessage(java.lang.String)
      */
     @Override
-    public final void displayMessage(final String messagee) {
+    public final void displayMessage(final String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
