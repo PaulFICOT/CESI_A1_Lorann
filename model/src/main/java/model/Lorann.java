@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import controller.ControllerOrder;
 
-public class Lorann extends Mobile {
+public class Lorann extends Mobile implements IMobile{
 	private int x;
 	private int y;
 	private IModel model;
@@ -34,13 +34,13 @@ public class Lorann extends Mobile {
 		this.x = x;
 		this.y = y;
 
-		try {
+/*		try {
 			this.image = ImageIO.read(new File("src/main/resources/sprite/lorann_b.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 	}
 
 	public int getX() {

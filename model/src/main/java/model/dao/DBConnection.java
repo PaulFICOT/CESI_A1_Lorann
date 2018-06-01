@@ -26,11 +26,12 @@ final class DBConnection {
 	}
 
 	private Boolean open() {
-		final DBProperties dbProperties = new DBProperties();
-		try {
+			final DBProperties dbProperties = new DBProperties();
+			try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			this.connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getLogin(), dbProperties.getPassword());
-		} catch (final ClassNotFoundException e) {
+		} 
+		catch (final ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (final SQLException e) {
 			e.printStackTrace();

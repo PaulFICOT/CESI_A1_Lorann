@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class Black {
+public class Black implements IElement {
 
 	private int x;
 	private int y;
