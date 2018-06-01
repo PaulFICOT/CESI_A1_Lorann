@@ -23,30 +23,33 @@ public class ViewFacade implements IView, Runnable {
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) { //KeyEvent which get back the enter
 			
 		switch (keyCode) {
-		case KeyEvent.VK_NUMPAD6: //NUMPAD mean the number at the right of the keyboard
+		case KeyEvent.VK_RIGHT: //NUMPAD mean the number at the right of the keyboard
 			return ControllerOrder.Right;
 			
-		case KeyEvent.VK_NUMPAD4:
+		case KeyEvent.VK_LEFT:
 			return ControllerOrder.Left;
 			
-		case KeyEvent.VK_NUMPAD8:
+		case KeyEvent.VK_UP:
 			return ControllerOrder.Up;
 			
-		case KeyEvent.VK_NUMPAD2:
+		case KeyEvent.VK_DOWN:
 			return ControllerOrder.Down;
-			
-		case KeyEvent.VK_NUMPAD9:
+			/*
+			 * 
+			 * Problem duplicate case without any logic
+			 * 
+		case KeyEvent.VK_RIGHT + KeyEvent.VK_UP:
 			return ControllerOrder.UpperRight;
 			
-		case KeyEvent.VK_NUMPAD7:
+		case KeyEvent.VK_LEFT + KeyEvent.VK_UP:
 			return ControllerOrder.UpperLeft;
 			
-		case KeyEvent.VK_NUMPAD3:
+		case KeyEvent.VK_RIGHT + KeyEvent.VK_DOWN:
 			return ControllerOrder.LowerRight;
 			
-		case KeyEvent.VK_NUMPAD1:
+		case KeyEvent.VK_LEFT + KeyEvent.VK_DOWN:
 			return ControllerOrder.LowerLeft;
-		
+			*/
 		case KeyEvent.VK_SPACE:
 			return ControllerOrder.Spell;
 		}

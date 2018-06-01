@@ -24,7 +24,7 @@ public class RainbowSpell extends Mobile implements IElement {
 
 	public RainbowSpell(int x, int y, char c, IModel model) {
 
-		spelled = true;
+		spelled = false;
 		
 		this.model = model;
 		try {
@@ -33,7 +33,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Armobile.add((IMobile) this);
+		Armobile.add(this);
 		this.x = x;
 		this.y = y;
 		this.c = c;
@@ -107,7 +107,7 @@ public class RainbowSpell extends Mobile implements IElement {
 	//Behavior of the spell depending of the direction of the attack
 	
 	public void moveL() {
-
+		
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) {
 				// kill monster
@@ -254,11 +254,12 @@ public class RainbowSpell extends Mobile implements IElement {
 	}
 
 	public void move() {
-		if (this.spelled == true) {
+		if (this.spelled == false) {
 			
 			switch (c) {
 
 			case 'R':
+			
 				try {
 					image = Image1();
 				} catch (IOException e) {
