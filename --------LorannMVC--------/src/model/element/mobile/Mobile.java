@@ -7,11 +7,12 @@ import javax.swing.ImageIcon;
 
 import contract.model.ILevel;
 import contract.model.IMobile;
+import controller.ControllerFacade;
 import fr.exia.showboard.IBoard;
 import model.element.Element;
 import model.element.Permeability;
 import model.element.Sprite;
-import model.element.motionless.Gatec;
+import model.element.mobile.Gate;
 import model.element.motionless.Gateo;
 import model.element.motionless.MotionlessElement;
 
@@ -350,7 +351,7 @@ public abstract class Mobile extends Element implements IMobile {
     
     @Override
     public Boolean checkWin() {
-        return this.getLevel().getOnTheLevelXY(this.getX(), this.getY()).getPermeability() == Permeability.GATEC;
+        return getX() == 10 && getY()==5;
     
     }
     
@@ -379,11 +380,11 @@ public abstract class Mobile extends Element implements IMobile {
  
           Gatec.SPRITE.loadImage();*/
           //gatec.setSprite(Gatec.SPRITE);
-        	Sprite SPRITE = new Sprite('A', "gate_open.png");
-        	SPRITE.loadImage();
+        /*	Sprite SPRITE = new Sprite('H', "gate_open.png");
+        	SPRITE.loadImage();*/
         	
-        	
-           	this.setSprite(SPRITE);
+        			
+ 
   
         	Open();
         	

@@ -18,7 +18,7 @@ public abstract class MotionlessElementFactory {
     private static final Crystal crystal = new Crystal();
     
     /** The Constant Gatec. */
-    private static final Gatec gatec = new Gatec();
+   // private static final Gatec gatec = new Gatec();
     
     private static final Gateo gateo = new Gateo();
     
@@ -32,7 +32,7 @@ public abstract class MotionlessElementFactory {
             verticalBone,
             purse,
             crystal,
-            gatec,
+          //  gatec,
             tile,
             monstre,
             gateo,
@@ -88,9 +88,9 @@ public abstract class MotionlessElementFactory {
      *
      * @return the motionless element
      */
-    public static MotionlessElement createGatec() {
+   /* public static MotionlessElement createGatec() {
         return gatec;
-    }
+    }*/
     
     public static MotionlessElement createGateo() {
         return gateo;

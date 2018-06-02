@@ -36,6 +36,8 @@ public class ViewFacade implements IViewFacade, Runnable, KeyListener {
 
     /** The lorann. */
     private IMobile          lorann;
+    
+    private IMobile          gatec;
 
     /** The order performer. */
     private IOrderPerformer  orderPerformer;
@@ -53,10 +55,12 @@ public class ViewFacade implements IViewFacade, Runnable, KeyListener {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public ViewFacade(final ILevel level, final IMobile lorann) throws IOException {
+    public ViewFacade(final ILevel level, final IMobile lorann, final IMobile gatec) throws IOException {
         this.setLevel(level);
         this.setLorann(lorann);
+        this.setGatec(gatec);
         this.getLorann().getSprite().loadImage();
+        this.getGatec().getSprite().loadImage();
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
@@ -94,7 +98,8 @@ public class ViewFacade implements IViewFacade, Runnable, KeyListener {
         
         
         boardFrame.addPawn(this.getLorann());
-
+        boardFrame.addPawn(this.getGatec());
+        
         this.getLevel().getObservable().addObserver(boardFrame.getObserver());
         
         boardFrame.setVisible(true);
@@ -211,6 +216,10 @@ public class ViewFacade implements IViewFacade, Runnable, KeyListener {
     private IMobile getLorann() {
         return this.lorann;
     }
+    
+    private IMobile getGatec() {
+        return this.gatec;
+    }
 
     /**
      * Sets my vehicle.
@@ -222,6 +231,9 @@ public class ViewFacade implements IViewFacade, Runnable, KeyListener {
         this.lorann = lorann;
     }
 
+    private void setGatec(final IMobile gatec) {
+        this.gatec = gatec;
+    }
 
     /**
      * Gets the close view.

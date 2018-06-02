@@ -28,4 +28,6 @@ public interface IElement extends ISquare{
      */
     @Override
     Image getImage();
+
+	void Gateoo();
 }

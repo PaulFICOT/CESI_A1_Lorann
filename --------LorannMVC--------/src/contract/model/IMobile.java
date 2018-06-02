@@ -104,5 +104,9 @@ public interface IMobile extends IPawn, IElement {
 
 	Boolean isWin();
 
+	void Gateo();
+
+	void Gatec();
+
 
 }

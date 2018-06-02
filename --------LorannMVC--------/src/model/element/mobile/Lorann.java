@@ -211,5 +211,17 @@ public class Lorann extends Mobile{
         this.doNothing();
         
                 }
+
+	@Override
+	public void Gateo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Gatec() {
+		// TODO Auto-generated method stub
+		
+	}
     }
 

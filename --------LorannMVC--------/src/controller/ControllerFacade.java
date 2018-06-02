@@ -25,9 +25,13 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
     private UserOrder stackOrder;
     
     private int i = 1;
+    
+    public  boolean ouvert = false;
 	
     
-    /**
+
+
+	/**
      * Instantiates a new Lorann controller.
      *
      * @param view
@@ -52,7 +56,7 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 			getModel().getLorann().alive();
 			
 			if(this.getModel().getLorann().isAlive()) {
-		
+				
             Thread.sleep(speed);
             switch (this.getStackOrder()) {
                 case RIGHT:
@@ -83,11 +87,14 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
                     this.getModel().getLorann().doNothing(i);
                     break;*/
                 case NOP:
+                	
+                	
             	switch(i){
             		
             		
             		case 1:
             			this.getModel().getLorann().doNothingUp(); 
+            	
             		break;
             		
             		case 2:
@@ -125,8 +132,17 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 
             		i++;
 
+            		
+
+            		
+            		
             	}
+            if(getModel().getLorann().isCrystal()==true){
             	
+            	
+            	this.getModel().getGatec().Gateo(); 
+            }
+ 
 
 			}          
                     
@@ -145,6 +161,9 @@ public class ControllerFacade implements IControllerFacade, IOrderPerformer {
 	          this.clearStackOrder();
       
 		}
+		
+		this.getModel().getGatec().Gateo();
+		
         this.getView().displayMessage(" TU AS GAGNE\nTon score : " + Mobile.score );
 	}
 	

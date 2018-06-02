@@ -15,4 +15,6 @@ public interface IModelFacade {
      * @return Lorann
      */
     IMobile getLorann();
+    
+    IMobile getGatec();
 }

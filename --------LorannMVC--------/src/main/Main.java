@@ -13,7 +13,7 @@ public class Main {
    
 	public static void main(final String[] args) throws IOException, InterruptedException {
         final IModelFacade model = new ModelFacade("level.txt");
-        final IViewFacade view = new ViewFacade(model.getLevel(), model.getLorann());
+        final IViewFacade view = new ViewFacade(model.getLevel(), model.getLorann(), model.getGatec());
         final IControllerFacade controller = new ControllerFacade(view, model);
         view.setOrderPerformer(controller.getOrderPeformer());
 
