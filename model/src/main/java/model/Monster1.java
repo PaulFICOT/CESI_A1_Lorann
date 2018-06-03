@@ -16,6 +16,7 @@ public class Monster1 extends Mobile{
 	
 	private int x;
 	private int y;
+	private boolean isAlive = true;
 
 	private IModel model;
 
@@ -33,12 +34,11 @@ public class Monster1 extends Mobile{
 
 	}
 
-	int timerTimeInMilliSeconds = 1000;
+	int timerTimeInMilliSeconds = 1500;
 	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			move();
 			model.refresh();
-
 		}
 	});
 

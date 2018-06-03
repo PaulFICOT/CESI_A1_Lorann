@@ -120,7 +120,7 @@ public class RainbowSpell extends Mobile implements IElement {
 				this.setX(this.getX() - 1);
 
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.COLLECTABLE) {
-				this.setX(this.getX() - 1);
+				this.setX(this.getX() + 1);
 				this.wall = true;
 			}
 		}
