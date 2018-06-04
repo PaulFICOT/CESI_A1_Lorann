@@ -21,64 +21,44 @@ public Controller(final IView view, final IModel model) { // Controller
 	this.setModel(model);
 }
 
-private void setView(final IView view) {
-	this.view = view;
-}
-
-
+//setter model
 private void setModel(final IModel model) {
 	this.model = model;
+}
+//setter view
+private void setView(final IView view) {
+	this.view = view;
 }
 
 public void orderPerform(final ControllerOrder controllerOrder) throws IOException, SQLException { //Get back the enter from the View before send the char to the Model
 	switch (controllerOrder) {
 
-case Right:
-this.c = 'R';
-this.model.getArmobile().get(0).move(c);
-break;
+		case Right:
+			this.c = 'R';
+			this.model.getArmobile().get(0).move(c);
+			break;
 
-case Left:
-this.c = 'L';
-this.model.getArmobile().get(0).move(c);
-break;
+		case Left:
+			this.c = 'L';
+			this.model.getArmobile().get(0).move(c);
+			break;	
 
-case Up:
-this.c = 'U';
-this.model.getArmobile().get(0).move(c);
-break;
+		case Up:
+			this.c = 'U';
+			this.model.getArmobile().get(0).move(c);
+			break;
 
-case Down:
-this.c = 'D';
-this.model.getArmobile().get(0).move(c);
-break;
+		case Down:
+			this.c = 'D';
+			this.model.getArmobile().get(0).move(c);
+			break;
 
-case UpperRight:
-this.c = '9';
-this.model.getArmobile().get(0).move(c);
-break;
+		case Spell:
+			this.model.getArmobile().get(0).launchSpell(c);
+			break;
 
-case UpperLeft:
-this.c = '7';
-this.model.getArmobile().get(0).move(c);
-break;
-
-case LowerRight:
-this.c = '3';
-this.model.getArmobile().get(0).move(c);
-break;
-
-case LowerLeft:
-this.c = '1';
-this.model.getArmobile().get(0).move(c);
-break;
-
-case Spell:
-this.model.getArmobile().get(0).launchSpell(c);
-break;
-
-default:
-break;
+		default:
+			break;
 }
 }
 

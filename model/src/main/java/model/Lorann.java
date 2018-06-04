@@ -19,6 +19,7 @@ public class Lorann extends Mobile{
 	private IModel model;
 	private int exitX;
 	private int exitY;
+	public boolean spelled = false;
 	int score = 0;
 	char c;
 	int lvl;
@@ -80,21 +81,20 @@ public class Lorann extends Mobile{
 									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
 									this.exitX = obj2.getX();
 									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
+									Arimages.set(Arimages.indexOf(obj2), doorO);
 								}
 							}
 						}
-						this.score++;
+						this.score = score + 100;
+						System.out.println("Le score est de " +score);
 						this.setX(getX() + 1);
-						IElement black = (IElement) new Black(obj.getX(), obj.getY());
+						IElement black = new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
 					}
-
 				}
 			}
 			break;
-
 		// move Left
 		case 'L':
 			this.image = ImageL();
@@ -112,7 +112,7 @@ public class Lorann extends Mobile{
 									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
 									this.exitX = obj2.getX();
 									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
+									Arimages.set(Arimages.indexOf(obj2),doorO);
 								}
 							}
 						}
@@ -121,8 +121,7 @@ public class Lorann extends Mobile{
 						IElement black = (IElement) new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
-					}
-
+					} 
 				}
 			}
 			break;
@@ -144,7 +143,7 @@ public class Lorann extends Mobile{
 									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
 									this.exitX = obj2.getX();
 									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
+									Arimages.set(Arimages.indexOf(obj2), doorO);
 								}
 							}
 						}
@@ -176,7 +175,7 @@ public class Lorann extends Mobile{
 									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
 									this.exitX = obj2.getX();
 									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
+									Arimages.set(Arimages.indexOf(obj2),doorO);
 								}
 							}
 						}
@@ -190,154 +189,19 @@ public class Lorann extends Mobile{
 				}
 			}
 			break;
-
-		// move UpperRight
-		case '9':
-			this.image = ImageUr();
-			this.c = c;
-
-			for (IElement obj : this.Arimages) {
-				if ((obj.getX() == this.getX() + 1) && (obj.getY() == this.getY() - 1)) {
-					if (obj.getPerm() == Permeability.PENETRABLE) {
-						this.setX(getX() + 1);
-						this.setY(getY() - 1);
-						break;
-					} else if (obj.getPerm() == Permeability.COLLECTABLE) {
-						if (obj.getName() == "crystal") {
-							for (IElement obj2 : this.Arimages) {
-								if (obj2.getName() == "doorC") {
-									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
-									this.exitX = obj2.getX();
-									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
-								}
-							}
-						}
-						this.score++;
-						this.setY(getY() - 1);
-						this.setX(getX() + 1);
-						IElement black = (IElement) new Black(obj.getX(), obj.getY());
-						Arimages.set(Arimages.indexOf(obj), black);
-						break;
-					}
-
-				}
-			}
-			break;
-
-		// move UpperLeft
-		case '7':
-			this.image = ImageUl();
-			this.c = c;
-
-			for (IElement obj : this.Arimages) {
-				if ((obj.getY() == this.getY() - 1) && (obj.getX() == this.getX() - 1)) {
-					if (obj.getPerm() == Permeability.PENETRABLE) {
-						this.setY(getY() - 1);
-						this.setX(getX() - 1);
-						break;
-					} else if (obj.getPerm() == Permeability.COLLECTABLE) {
-						if (obj.getName() == "crystal") {
-							for (IElement obj2 : this.Arimages) {
-								if (obj2.getName() == "doorC") {
-									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
-									this.exitX = obj2.getX();
-									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
-								}
-							}
-						}
-						this.score++;
-						this.setY(getY() - 1);
-						this.setX(getX() - 1);
-						IElement black = (IElement) new Black(obj.getX(), obj.getY());
-						Arimages.set(Arimages.indexOf(obj), black);
-						break;
-					}
-
-				}
-			}
-			break;
-
-		// move LowerRight
-		case '3':
-			this.image = ImageDr();
-			this.c = c;
-
-			for (IElement obj : this.Arimages) {
-				if ((obj.getY() == this.getY() + 1) && (obj.getX() == this.getX() + 1)) {
-					if (obj.getPerm() == Permeability.PENETRABLE) {
-						this.setY(getY() + 1);
-						this.setX(getX() + 1);
-						break;
-					} else if (obj.getPerm() == Permeability.COLLECTABLE) {
-						if (obj.getName() == "crystal") {
-							for (IElement obj2 : this.Arimages) {
-								if (obj2.getName() == "doorC") {
-									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
-									this.exitX = obj2.getX();
-									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
-								}
-							}
-						}
-						this.score++;
-						this.setY(getY() + 1);
-						this.setX(getX() + 1);
-						IElement black = (IElement) new Black(obj.getX(), obj.getY());
-						Arimages.set(Arimages.indexOf(obj), black);
-						break;
-					}
-
-				}
-			}
-			break;
-
-		// move LowerLeft
-		case '1':
-			this.image = ImageDl();
-			this.c = c;
-
-			for (IElement obj : this.Arimages) {
-				if ((obj.getX() == this.getX() - 1) && (obj.getY() == this.getY() + 1)) {
-					if (obj.getPerm() == Permeability.PENETRABLE) {
-						this.setX(getX() - 1);
-						this.setY(getY() + 1);
-						break;
-					} else if (obj.getPerm() == Permeability.COLLECTABLE) {
-						if (obj.getName() == "crystal") {
-							for (IElement obj2 : this.Arimages) {
-								if (obj2.getName() == "doorC") {
-									DoorO doorO = new DoorO(obj2.getX(), obj2.getY());
-									this.exitX = obj2.getX();
-									this.exitY = obj2.getY();
-									Arimages.set(Arimages.indexOf(obj2), (IElement) doorO);
-								}
-							}
-						}
-						this.score++;
-						this.setY(getY() + 1);
-						this.setX(getX() - 1);
-						IElement black = (IElement) new Black(obj.getX(), obj.getY());
-						Arimages.set(Arimages.indexOf(obj), black);
-						break;
-					}
-
-				}
-			}
-
-			break;
-		// default action
-		default:
-			break;
-
 		}
 		if ((this.x == this.exitX) && (this.y == this.exitY)) {
 			this.lvl = this.model.getLvl();
+			if(lvl<=5) {
 			lvl++;
 			this.model.createMap(lvl);
-		} if(this.model.checkBump(this.getX(), this.getY()) == Permeability.MONSTER){
+			System.out.println("END");
+			}
+			
+		}
+		if(this.model.checkBump(this.getX(), this.getY()) == Permeability.MONSTER){
 			this.model.createMap(this.model.getLvl());
+			//System.out.println("Monstre");
 		}
 
 	}
@@ -392,8 +256,10 @@ public class Lorann extends Mobile{
 	}
 
 	public void launchSpell(char c) throws SQLException {
+		if(spelled  == false) {
 		RainbowSpell spell = new RainbowSpell(this.getX(), this.getY(), this.c, this.model);
-
+		spelled = true;
+		}
 	}
 
 	public void getMessage() {

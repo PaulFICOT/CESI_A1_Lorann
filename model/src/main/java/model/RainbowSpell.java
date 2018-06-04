@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 public class RainbowSpell extends Mobile implements IElement {
 	private int x;
+	RainbowSpell spell;
 	private int y;
 	private char c;
 	boolean spelled = false;
@@ -19,12 +20,10 @@ public class RainbowSpell extends Mobile implements IElement {
 	boolean lorann;
 	Permeability checkPerm;
 	List<IMobile> Armobile;
-
-	Permeability perm = Permeability.SPELL;
+	List<IElement> Arimages;
+	Permeability perm = Permeability.COLLECTABLE;
 
 	public RainbowSpell(int x, int y, char c, IModel model) {
-
-		spelled = false;
 		
 		this.model = model;
 		try {
@@ -33,11 +32,12 @@ public class RainbowSpell extends Mobile implements IElement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Armobile.add(this);
 		this.x = x;
 		this.y = y;
 		this.c = c;
-
+		spelled = true;
 	}
 
 	public int getX() {
@@ -110,9 +110,9 @@ public class RainbowSpell extends Mobile implements IElement {
 		
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) {
-				// kill monster
+				
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() + 1);
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.BLOCKING) {
@@ -129,7 +129,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) {
 				// kill monster
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() - 1);
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.BLOCKING) {
@@ -143,13 +143,26 @@ public class RainbowSpell extends Mobile implements IElement {
 		}
 	}
 
+	private void Spell() {
+		// TODO Auto-generated method stub
+		System.out.println("execute");
+		for (IElement obj : this.Arimages) {
+			if((obj.getX() == this.getX() + 1) && (obj.getY() == this.getY())) {
+				if(obj.getPerm() == Permeability.CHARACTER) {
+					this.spell = null;
+					break;
+				}
+			}
+		}
+	}
+
 	public void moveU() {
 		
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.MONSTER) {
-				// kill monster
+	
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() + 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.BLOCKING) {
@@ -166,7 +179,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.MONSTER) {
 				// kill monster
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() - 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.BLOCKING) {
@@ -185,8 +198,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.MONSTER) {
 				// kill monster
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.CHARACTER) {
-				spelled = false;
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() - 1);
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.BLOCKING) {
@@ -202,7 +214,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.MONSTER) { //+1 became -1
 				// kill monster
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() + 1);
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.BLOCKING) {
@@ -222,7 +234,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.MONSTER) {
 				// kill monster
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() - 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.BLOCKING) {
@@ -239,7 +251,7 @@ public class RainbowSpell extends Mobile implements IElement {
 			if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.MONSTER) {//+1 became -1
 				// kill monster
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.CHARACTER) {
-				Armobile.remove(this);
+				Spell();
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() + 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.BLOCKING) {
@@ -254,8 +266,9 @@ public class RainbowSpell extends Mobile implements IElement {
 	}
 
 	public void move() {
-		if (this.spelled == false) {
 			
+		if(this.spelled == true) {
+		
 			switch (c) {
 
 			case 'R':
@@ -298,12 +311,8 @@ public class RainbowSpell extends Mobile implements IElement {
 				moveD();
 				break;
 			}
-
-		} else{}
-		// TODO Auto-generated method stub
-
+		}	
 	}
-
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;

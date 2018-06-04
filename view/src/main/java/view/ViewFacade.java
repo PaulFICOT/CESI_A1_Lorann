@@ -23,7 +23,7 @@ public class ViewFacade implements IView, Runnable {
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) { //KeyEvent which get back the enter
 			
 		switch (keyCode) {
-		case KeyEvent.VK_RIGHT: //NUMPAD mean the number at the right of the keyboard
+		case KeyEvent.VK_RIGHT: //VK_XXXX mean the arrows above the keyboard
 			return ControllerOrder.Right;
 			
 		case KeyEvent.VK_LEFT:
@@ -34,22 +34,7 @@ public class ViewFacade implements IView, Runnable {
 			
 		case KeyEvent.VK_DOWN:
 			return ControllerOrder.Down;
-			/*
-			 * 
-			 * Problem duplicate case without any logic
-			 * 
-		case KeyEvent.VK_RIGHT + KeyEvent.VK_UP:
-			return ControllerOrder.UpperRight;
 			
-		case KeyEvent.VK_LEFT + KeyEvent.VK_UP:
-			return ControllerOrder.UpperLeft;
-			
-		case KeyEvent.VK_RIGHT + KeyEvent.VK_DOWN:
-			return ControllerOrder.LowerRight;
-			
-		case KeyEvent.VK_LEFT + KeyEvent.VK_DOWN:
-			return ControllerOrder.LowerLeft;
-			*/
 		case KeyEvent.VK_SPACE:
 			return ControllerOrder.Spell;
 		}
@@ -60,7 +45,7 @@ public class ViewFacade implements IView, Runnable {
 	public void printMessage(final String message) {
 		this.view.printMessage(message);
 	}
-
+	
 	public void run() {
 		this.view.setVisible(true);
 	}

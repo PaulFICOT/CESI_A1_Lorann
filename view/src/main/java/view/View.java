@@ -18,12 +18,12 @@ class View extends JFrame implements KeyListener {
 	private IModel	model;
 	private IController	controller;
 	private static final long	serialVersionUID	= -697358409737458175L;
-
-
+	
+	/*polymorphism of constructors*/
 	public View(final IModel model) throws HeadlessException {
 		this.buildViewFrame(model);
 	}
-
+	
 	public View(final IModel model, final GraphicsConfiguration gc) {
 		super(gc);
 		this.buildViewFrame(model);
@@ -39,17 +39,17 @@ class View extends JFrame implements KeyListener {
 		super(title, gc);
 		this.buildViewFrame(model);
 	}
-
+	
+	/*getters and setter of controller*/
 	public IController getController() {
 		return this.controller;
 	}
-
 
 	protected void setController(final IController controller) {
 		this.controller = controller;
 	}
 
-
+	/*getter and setter of model*/
 	protected IModel getModel() {
 		return this.model;
 	}
@@ -59,8 +59,8 @@ class View extends JFrame implements KeyListener {
 		this.model = model;
 	}
 
-
-	private void buildViewFrame(final IModel model) { //The principal window
+	//built the frame
+	private void buildViewFrame(final IModel model) { 
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -68,7 +68,6 @@ class View extends JFrame implements KeyListener {
 		this.setContentPane(new Panel(this));
 		this.setTitle("LorannProject");
 		this.setSize(704, 448);
-		//this.setBackground(Color.BLACK);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
@@ -81,7 +80,7 @@ class View extends JFrame implements KeyListener {
 
 	}
 
-
+	/*KeyListener method for move*/
 	public void keyPressed(final KeyEvent e) {
 		try {
 			this.getController().orderPerform(ViewFacade.keyCodeToControllerOrder(e.getKeyCode()));

@@ -8,14 +8,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
+import javax.swing.Timer;
 
 import javax.imageio.ImageIO;
 
 public class Monster3 extends Mobile{
-
-
-	Timer timer = new Timer();
 
 	private int x;
 	private int y;
@@ -33,6 +30,18 @@ public class Monster3 extends Mobile{
 		this.x = x;
 		this.y = y;
 	}
+	
+	private int timerTimeInMilliSeconds = 1500;
+	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			move();
+			model.refresh();
+		}
+		
+	});
 	
 	public int getX() {
 		return x;
@@ -183,7 +192,6 @@ public void move() {
 	else {
 	}
 	if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
-		System.out.println("ogv");
 		try {
 			this.model.getArmobile().remove(this);
 		} catch (SQLException e) {

@@ -34,14 +34,25 @@ public class Monster1 extends Mobile{
 
 	}
 
-	int timerTimeInMilliSeconds = 1500;
+	private int timerTimeInMilliSeconds = 2000;
 	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			if(isAlive == true) {
 			move();
 			model.refresh();
+			}
+			else try {
+				monsterDie();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	});
-
+	
+	public void monsterDie() throws SQLException {
+		this.model.getArmobile().remove(this);
+	}
 	public int getX() {
 		return x;
 	}
@@ -68,10 +79,22 @@ public class Monster1 extends Mobile{
 	}
 
 	public void move() {
-
+		
+		if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
+			try {
+				this.model.getArmobile().remove(this);
+				isAlive = false;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(isAlive == true) {
 		/*
 		 * Upper-left
 		 */
+		
 
 		if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() < this.y))
 
@@ -80,8 +103,7 @@ public class Monster1 extends Mobile{
 				if(this.model.checkBump(this.getX()-1, this.getY()-1) == Permeability.PENETRABLE){
 						this.setX(getX() - 1);
 						this.setY(getY() - 1);
-						break;
-					
+						break;					
 				}
 			}
 
@@ -190,20 +212,7 @@ public class Monster1 extends Mobile{
 					}
 				}
 			}
-		
-
-		else {
 		}
-		if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
-			System.out.println("ogv");
-			try {
-				this.model.getArmobile().remove(this);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	
 	}
 
 	public void launchSpell(char c) {

@@ -37,7 +37,7 @@ public class DoorO extends Background {
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage doorO = ImageIO.read(new File("src/main/resources/sprite/gate_open.png"));
+		BufferedImage doorO = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\gate_open.png"));
 		return doorO;
 	}
 

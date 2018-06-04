@@ -22,6 +22,7 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 	private View view;
 	/* New timer for the repaint */
 	Timer timer = new Timer(200, this);
+	/*ArrayList for sprites*/
 	public List<IElement> Arimages = new ArrayList<IElement>();
 	public List<IMobile> Armobile = new ArrayList<IMobile>();
 	/** The Constant serialVersionUID. */
@@ -33,30 +34,15 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 		view.getModel().getObservable().addObserver(this);
 	}
 
-	/**
-	 * Gets the view frame.
-	 *
-	 * @return the view frame
-	 */
+	/* Get the view Frame */
 	private View getViewFrame() {
 		return this.view;
 	}
-
-	/**
-	 * Sets the view frame.
-	 *
-	 * @param viewFrame
-	 *            the new view frame
-	 */
+	//set the View Frame
 	private void setViewFrame(final View view) {
 		this.view = view;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
 	/* Get method for the Armobile and Arimages */
 	public List<IMobile> getArmobile(){
 		return this.Armobile;
@@ -66,20 +52,17 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 		return this.Arimages;
 	}
 
+	/* Update method for the repaint*/
 	public void update(final Observable arg0, final Object arg1) {
 		this.repaint();
 	}
-	
-	 
-	   
-	    
-
+		 	   	    
+	//Painting of the elements within the ArrayList
 	@Override
-	protected void paintComponent(final Graphics graphics) { //Painting ogf the elements within the ArrayList
-
+	protected void paintComponent(final Graphics graphics) { 
+		
 		int pixelNumbers = 32;
 		
-
 		try {
 			Arimages = this.view.getModel().getArimages();
 			Armobile = this.view.getModel().getArmobile();
@@ -106,7 +89,6 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 	
 	public void actionPerformed(ActionEvent e) {
 		for (IMobile obj : this.Armobile){
-
 			obj.move();
 			repaint();
 		}
@@ -118,9 +100,8 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-}
+		// TODO Auto-generated method stub	
+	}
 
 	@Override
 	public List<IMobile> getMobile() {

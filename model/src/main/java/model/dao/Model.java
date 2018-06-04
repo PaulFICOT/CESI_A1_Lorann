@@ -38,7 +38,7 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 		private String message;
 		List<IElement> Arimages;
 		List<IMobile> Armobile;
-
+		
 		public int LevelSelection() { //The home frame, where we ask the user at which level he want to start
 			int level = 6;
 			String[] TabLvl = { "1", "2", "3", "4", "5" };
@@ -178,9 +178,9 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 					default:
 						Black black = new Black(x, y);
-						Arimages.add(black);
-						break;
-
+						Arimages.add(black);// add() is a method that adds an
+											// element on the ArrayList called
+						break;					// here "Arimage"	
 					}
 				}
 			}
@@ -192,6 +192,7 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 		}
 
+		//Check bump between element
 		public Permeability checkBump(int x, int y) {
 
 			Permeability permBump = null;
@@ -210,9 +211,8 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 			for (IElement obj : Arimages) {
 
 				if ((obj.getX() == x) && (obj.getY() == y)) {
-					if (obj.getPerm() == Permeability.COLLECTABLE) {
-						this.permBump = Permeability.COLLECTABLE;
-						System.out.println("Score +100");
+					if ((obj.getPerm() == Permeability.COLLECTABLE)) {
+						this.permBump = Permeability.COLLECTABLE;						
 					} else if (obj.getPerm() == Permeability.PENETRABLE) {
 						this.permBump = Permeability.PENETRABLE;
 					} else if (obj.getPerm() == Permeability.BLOCKING) {
@@ -221,17 +221,13 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 				}
 			}
 			return this.permBump;
-			
-
 		}
 
 		public List<IMobile> getArmobile() {
 			return this.Armobile;
 		}
 
-		/**
-		 * Instantiates a new model.
-		 */
+		/* Instantiate a new model*/
 		public Model() {
 			this.message = "Initialisation du jeu.";
 		}
@@ -240,29 +236,14 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 		}
 
-		/**
-		 * Sets the message.
-		 *
-		 * @param message
-		 *            the new message
-		 */
+		
+		/* set a messagee */
 		private void setMessage(final String message) {
 			this.message = message;
 			this.setChanged();
 			this.notifyObservers();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see contract.IModel#getMessage(java.lang.String)
-		 */
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see contract.IModel#getObservable()
-		 */
 		public Observable getObservable() {
 			return this;
 		}

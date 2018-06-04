@@ -13,12 +13,9 @@ import javax.swing.ImageIcon;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
+import javax.swing.Timer;
 
 public class Monster4 extends Mobile{
-
-	int timerTimeInMilliSeconds = 1500;
-	
 
 	private int x;
 	private int y;
@@ -36,7 +33,19 @@ public class Monster4 extends Mobile{
 		this.x = x;
 		this.y = y;
 	}
+	
+	private int timerTimeInMilliSeconds = 1500;
+	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			move();
+			model.refresh();
+		}
+		
+	});
+	
 	public int getX() {
 		return x;
 	}
@@ -185,7 +194,6 @@ public void move() {
 	else {
 	}
 	if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
-		System.out.println("ogv");
 		try {
 			this.model.getArmobile().remove(this);
 		} catch (SQLException e) {
