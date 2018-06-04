@@ -16,9 +16,10 @@ public class Monster1 extends Mobile{
 	
 	private int x;
 	private int y;
-	private boolean isAlive = true;
-
+	
+	private Monster1 monster1;
 	private IModel model;
+	private Lorann lorann;
 
 	Permeability perm = Permeability.MONSTER;
 
@@ -29,29 +30,28 @@ public class Monster1 extends Mobile{
 		this.model = model;
 		this.Arimages = this.model.getArimages();
 		this.Armobile = this.model.getArmobile();
+		this.lorann = (Lorann) this.Armobile.get(0);
 		this.x = x;
 		this.y = y;
 
 	}
 
-	private int timerTimeInMilliSeconds = 2000;
+	private int timerTimeInMilliSeconds = 1500;
+	
 	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(isAlive == true) {
 			move();
 			model.refresh();
-			}
-			else try {
-				monsterDie();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 	});
 	
-	public void monsterDie() throws SQLException {
-		this.model.getArmobile().remove(this);
+	public void monsterDie() {
+		try {
+			this.model.getArmobile().remove(this.monster1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public int getX() {
 		return x;
@@ -83,18 +83,15 @@ public class Monster1 extends Mobile{
 		if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
 			try {
 				this.model.getArmobile().remove(this);
-				isAlive = false;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-		if(isAlive == true) {
 		/*
 		 * Upper-left
 		 */
-		
 
 		if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() < this.y))
 
@@ -103,7 +100,20 @@ public class Monster1 extends Mobile{
 				if(this.model.checkBump(this.getX()-1, this.getY()-1) == Permeability.PENETRABLE){
 						this.setX(getX() - 1);
 						this.setY(getY() - 1);
-						break;					
+						break;			
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()-1) == Permeability.CHARACTER) {
+					this.setX(getX() - 1);
+					this.setY(getY() - 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
 				}
 			}
 
@@ -117,8 +127,20 @@ public class Monster1 extends Mobile{
 						this.setX(getX() + 1);
 						this.setY(getY() - 1);
 						break;
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()-1) == Permeability.CHARACTER) {
+					this.setX(getX() + 1);
+					this.setY(getY() - 1);
+					this.model.reloadMap();
+						break;
 					}
-				
+				else if (this.model.checkBump(this.getX()+1,this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
 			}
 		}
 
@@ -134,6 +156,19 @@ public class Monster1 extends Mobile{
 						this.setY(getY() + 1);
 						break;
 					
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()+1) == Permeability.CHARACTER) {
+					this.setX(getX() - 1);
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()+1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
 				}
 			}
 		}
@@ -152,6 +187,19 @@ public class Monster1 extends Mobile{
 					
 				}
 			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()+1) == Permeability.CHARACTER) {
+					this.setX(getX() + 1);
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()+1,this.getY()+1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
 		}
 
 		/*
@@ -165,7 +213,18 @@ public class Monster1 extends Mobile{
 						this.setX(getX() - 1);
 						break;
 					}
-				
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()) == Permeability.CHARACTER) {
+						this.setX(getX() - 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
 			}
 		}
 
@@ -180,7 +239,18 @@ public class Monster1 extends Mobile{
 						this.setX(getX() + 1);
 						break;
 					}
-				
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.CHARACTER) {
+						this.setX(getX() + 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
 			}
 		}
 
@@ -195,22 +265,44 @@ public class Monster1 extends Mobile{
 						this.setY(getY() - 1);
 						break;
 					}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX(),this.getY()-1) == Permeability.CHARACTER) {
+						this.setY(getY() - 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX(),this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
 				}
+			}
 			
 		}
 
 		/*
 		 * Down
 		 */
-
+		
 		else if ((this.Armobile.get(0).getX() == this.x) && (this.Armobile.get(0).getY() > this.y)) {
-
 			for (IElement obj : this.Arimages) {
 				if (this.model.checkBump(this.getX(), this.getY()+1) == Permeability.PENETRABLE) {
 						this.setY(getY() + 1);
 						break;
 					}
 				}
+		}
+		
+		for (IMobile obj : this.Armobile) {
+			if (this.model.checkBump(this.getX(),this.getY()+1) == Permeability.CHARACTER) {
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+					break;
+				}
+			else if (this.model.checkBump(this.getX(),this.getY()+1) == Permeability.SPELL) {
+				this.lorann.destroySpell();
+				this.monsterDie();
 			}
 		}
 	}
@@ -229,4 +321,15 @@ public class Monster1 extends Mobile{
 		// TODO Auto-generated method stub
 		return "monster1";
 }
+	public void destroyMonster() {
+		// TODO Auto-generated method stub
+		System.out.println("Test destroy");
+		try {
+			this.model.getArmobile().remove(this.monster1);
+			System.out.println("DESTROY !!!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

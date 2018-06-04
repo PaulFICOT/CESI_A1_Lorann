@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Observable;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 import controller.ControllerOrder;
 
@@ -19,13 +22,17 @@ public class Lorann extends Mobile{
 	private IModel model;
 	private int exitX;
 	private int exitY;
-	public boolean spelled = false;
+	private RainbowSpell spell;
+	private boolean spelled = false;
+	private boolean isAlive = true;
 	int score = 0;
 	char c;
 	int lvl;
 	Permeability perm = Permeability.CHARACTER;
+	
 	List<IElement> Arimages = new ArrayList<IElement>();
 	List<IMobile> Armobile = new ArrayList<IMobile>();
+	
 	BufferedImage image;
 
 	public Lorann(int x, int y, IModel model) throws SQLException {
@@ -43,7 +50,15 @@ public class Lorann extends Mobile{
 		}
 
 	}
-
+	
+	private int timerTimeInMilliSeconds = 10;
+	
+	Timer timer = new Timer(timerTimeInMilliSeconds, new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("test");
+		}
+	});
+	
 	public int getX() {
 		return x;
 	}
@@ -61,14 +76,15 @@ public class Lorann extends Mobile{
 	}
 
 	public void move(char c) throws IOException, SQLException {
-
+		if(isAlive == true) {
 		switch (c) {
 
 		// move Right
 		case 'R':
 			this.image = ImageR();
 			this.c = c;
-
+			
+			
 			for (IElement obj : this.Arimages) {
 				if ((obj.getX() == this.getX() + 1) && (obj.getY() == this.getY())) {
 					if (obj.getPerm() == Permeability.PENETRABLE) {
@@ -85,12 +101,16 @@ public class Lorann extends Mobile{
 								}
 							}
 						}
-						this.score = score + 100;
-						System.out.println("Le score est de " +score);
 						this.setX(getX() + 1);
+						score = score + 100;
+						System.out.println("Le score est de " +score);
 						IElement black = new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
+					} else if ((obj.getX() == this.getX() + 1) && (obj.getY() == this.getY())) {
+						if(obj.getPerm() == Permeability.MONSTER) {
+							System.out.println("test");
+						}
 					}
 				}
 			}
@@ -116,12 +136,19 @@ public class Lorann extends Mobile{
 								}
 							}
 						}
-						this.score++;
 						this.setX(getX() - 1);
+						score = score + 100;
+						System.out.println("Le score est de " +score);
 						IElement black = (IElement) new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
-					} 
+					} if(obj.getPerm() == Permeability.MONSTER) {
+						isAlive = false;
+					}
+				}else if ((obj.getX() == this.getX() - 1) && (obj.getY() == this.getY())) {
+					if(obj.getPerm() == Permeability.MONSTER) {
+						System.out.println("test");
+					}
 				}
 			}
 			break;
@@ -147,13 +174,23 @@ public class Lorann extends Mobile{
 								}
 							}
 						}
-						this.score++;
+						score = score + 100;
+						System.out.println("Le score est de " +score);
 						this.setY(getY() - 1);
 						IElement black = (IElement) new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
+					}else if (obj.getPerm() == Permeability.SPELL) {
+						if(obj.getName() == "spell") {
+							
+						}if(obj.getPerm() == Permeability.MONSTER) {
+							isAlive = false;
+						}
 					}
-
+				}if ((obj.getX() == this.getX()) && (obj.getY() == this.getY() -1)) {
+					if(obj.getPerm() == Permeability.MONSTER) {
+						System.out.println("test");
+					}
 				}
 			}
 			break;
@@ -179,32 +216,40 @@ public class Lorann extends Mobile{
 								}
 							}
 						}
-						this.score++;
+						score = score + 100;
+						System.out.println("Le score est de " +score);
 						this.setY(getY() + 1);
 						IElement black = (IElement) new Black(obj.getX(), obj.getY());
 						Arimages.set(Arimages.indexOf(obj), black);
 						break;
 					}
-
-				}
+				}else if ((obj.getX() == this.getX()) && (obj.getY() == this.getY() +1)) {
+					if(obj.getPerm() == Permeability.MONSTER) {
+						System.out.println("test");
+					}
+				}	
 			}
 			break;
 		}
 		if ((this.x == this.exitX) && (this.y == this.exitY)) {
 			this.lvl = this.model.getLvl();
 			if(lvl<=5) {
+			System.out.println("Lvl " +lvl+" END");
 			lvl++;
 			this.model.createMap(lvl);
-			System.out.println("END");
+			System.out.println("Road to lvl" + lvl);
 			}
 			
 		}
 		if(this.model.checkBump(this.getX(), this.getY()) == Permeability.MONSTER){
-			this.model.createMap(this.model.getLvl());
-			//System.out.println("Monstre");
+			this.model.reloadMap();
 		}
-
+		else if(this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
+			System.out.println("SPELL detect by Lorann");
+			this.destroySpell();
+		}
 	}
+}		
 
 	public BufferedImage ImageD() throws IOException {
 		image = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\lorann_b.png"));
@@ -257,10 +302,23 @@ public class Lorann extends Mobile{
 
 	public void launchSpell(char c) throws SQLException {
 		if(spelled  == false) {
-		RainbowSpell spell = new RainbowSpell(this.getX(), this.getY(), this.c, this.model);
+			this.spell = new RainbowSpell(this.getX(), this.getY(), this.c, this.model, this);
 		spelled = true;
 		}
 	}
+	
+	public void destroySpell() {
+		this.spell.spelled = false;
+		try {
+			this.model.getArmobile().remove(this.spell);
+			System.out.println("DESTROY !!!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		spelled = false;
+	}
+
 
 	public void getMessage() {
 		// TODO Auto-generated method stub
@@ -316,4 +374,16 @@ public class Lorann extends Mobile{
 		return "lorann";
 	}
 
+	@Override
+	public void doNothing() {
+		// TODO Auto-generated method stub
+		System.out.println("test");
+	for(IMobile obj : this.Armobile) {	
+		if ((obj.getX() == this.getX()) && (obj.getY() == this.getY())) {
+			if(obj.getPerm() == Permeability.MONSTER) {
+				
+				}
+			}
+		}
+	}		
 }

@@ -17,15 +17,17 @@ public class RainbowSpell extends Mobile implements IElement {
 	private IModel model;
 	BufferedImage image;
 	boolean wall;
-	boolean lorann;
+	private Lorann lorann;
+	private Monster1 monster1;
 	Permeability checkPerm;
 	List<IMobile> Armobile;
 	List<IElement> Arimages;
 	Permeability perm = Permeability.COLLECTABLE;
 
-	public RainbowSpell(int x, int y, char c, IModel model) {
+	public RainbowSpell(int x, int y, char c, IModel model, Lorann lorann) {
 		
 		this.model = model;
+		this.lorann = lorann;
 		try {
 			this.Armobile = this.model.getArmobile();
 		} catch (SQLException e) {
@@ -105,90 +107,91 @@ public class RainbowSpell extends Mobile implements IElement {
 	}
 
 	//Behavior of the spell depending of the direction of the attack
-	
 	public void moveL() {
-		
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) {
-				
+				this.lorann.destroySpell();
+				this.monster1.destroyMonster();
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.CHARACTER) {
-				Spell();
+				this.lorann.destroySpell(); 
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() + 1);
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.BLOCKING) {
 				this.wall = true;
-				this.setX(this.getX() - 1);
+				moveL();
+			//	this.setX(this.getX() - 1);
 
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.COLLECTABLE) {
-				this.setX(this.getX() + 1);
+			//	this.setX(this.getX() + 1);
 				this.wall = true;
+				moveL();
 			}
 		}
 
 		else if (this.wall == true) {
-			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) {
-				// kill monster
+			if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.MONSTER) {
+								this.lorann.destroySpell(); 
+								this.monster1.destroyMonster();
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() - 1);
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.BLOCKING) {
 				this.wall = false;
-				this.setX(this.getX() + 1);
+				moveL();
+			//	this.setX(this.getX() + 1);
 
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.COLLECTABLE) {
-				this.setX(this.getX() + 1);
+			//	this.setX(this.getX() + 1);
 				this.wall = false;
+				moveL();
 			}
 		}
 	}
 
-	private void Spell() {
-		// TODO Auto-generated method stub
-		System.out.println("execute");
-		for (IElement obj : this.Arimages) {
-			if((obj.getX() == this.getX() + 1) && (obj.getY() == this.getY())) {
-				if(obj.getPerm() == Permeability.CHARACTER) {
-					this.spell = null;
-					break;
-				}
-			}
-		}
-	}
+	
 
 	public void moveU() {
-		
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.MONSTER) {
-	
+								this.lorann.destroySpell();
+								this.monster1.destroyMonster();
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
+								
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() + 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.BLOCKING) {
 				this.wall = true;
-				this.setY(this.getY() - 1);
+				moveU();
+			//	this.setY(this.getY() - 1);
 
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.COLLECTABLE) {
-				this.setY(this.getY() - 1);
+			//	this.setY(this.getY() - 1);
 				this.wall = true;
+				moveU();
 			}
 		}
 
 		else if (this.wall == true) {
-			if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.MONSTER) {
+			if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.MONSTER) {
 				// kill monster
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() - 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.BLOCKING) {
 				this.wall = false;
-				this.setY(this.getY() + 1);
+				moveU();
+			//	this.setY(this.getY() + 1);
 
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.COLLECTABLE) {
-				this.setY(this.getY() + 1);
+			//	this.setY(this.getY() + 1);
 				this.wall = false;
+				moveU();
 			}
 		}
 	}
@@ -196,75 +199,94 @@ public class RainbowSpell extends Mobile implements IElement {
 	public void moveR() {
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.MONSTER) {
-				// kill monster
+								this.monster1.destroyMonster();
+								this.lorann.destroySpell(); 
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() - 1);
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.BLOCKING) {
 				this.wall = true;
-				this.setX(this.getX() + 1);
+				moveR();
+			//	this.setX(this.getX() + 1);
 			} else if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.COLLECTABLE) {
-				this.setX(this.getX() + 1);
+			//	this.setX(this.getX() + 1);
 				this.wall = true;
+				moveR();
 			}
 		}
 
 		else if (this.wall == true) {
-			if (this.model.checkBump(this.getX() - 1, this.getY()) == Permeability.MONSTER) { //+1 became -1
+			if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.MONSTER) { //+1 became -1
 				// kill monster
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.PENETRABLE) {
 				this.setX(this.getX() + 1);
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.BLOCKING) {
 				this.wall = false;
-				this.setX(this.getX() - 1);
+				moveR();
+			//	this.setX(this.getX() - 1);
 
 			} else if (this.model.checkBump(this.getX() + 1, this.getY()) == Permeability.COLLECTABLE) {
-				this.setX(this.getX() - 1);
+			//	this.setX(this.getX() - 1);
 				this.wall = false;
+				moveR();
+				
 			}
 		}
 	}
 
 	public void moveD() {
-
 		if (this.wall == false) {
 			if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.MONSTER) {
 				// kill monster
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() - 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.BLOCKING) {
 				this.wall = true;
-				this.setY(this.getY() + 1);
+				moveD();
+			//	this.setY(this.getY() + 1);
 
 			} else if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.COLLECTABLE) {
-				this.setY(this.getY() + 1);
+			//	this.setY(this.getY() + 1);
 				this.wall = true;
+				moveD();
 			}
 		}
 
 		else if (this.wall == true) {
 			if (this.model.checkBump(this.getX(), this.getY() - 1) == Permeability.MONSTER) {//+1 became -1
 				// kill monster
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.CHARACTER) {
-				Spell();
+								this.lorann.destroySpell(); 
+
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.PENETRABLE) {
 				this.setY(this.getY() + 1);
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.BLOCKING) {
 				this.wall = false;
-				this.setY(this.getY() - 1);
+				moveD();
+			//	this.setY(this.getY() - 1);
 
 			} else if (this.model.checkBump(this.getX(), this.getY() + 1) == Permeability.COLLECTABLE) {
-				this.setY(this.getY() - 1);
+			//	this.setY(this.getY() - 1);
 				this.wall = false;
+				moveD();
 			}
 		}
 	}
 
+	
 	public void move() {
 			
 		if(this.spelled == true) {

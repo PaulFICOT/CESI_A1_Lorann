@@ -21,10 +21,10 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 	/** The view frame. */
 	private View view;
 	/* New timer for the repaint */
-	Timer timer = new Timer(200, this);
+	Timer timer = new Timer(10, this);
 	/*ArrayList for sprites*/
-	public List<IElement> Arimages = new ArrayList<IElement>();
-	public List<IMobile> Armobile = new ArrayList<IMobile>();
+	public List<IElement> Arimages ;//= new ArrayList<IElement>();
+	public List<IMobile> Armobile ;//= new ArrayList<IMobile>();
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -998294702363713521L;
 
@@ -87,12 +87,18 @@ class Panel extends JPanel implements Observer, ActionListener, IView {
 	}	
 	/* Method to repaint the elements of the ArrayList */
 	
+	@SuppressWarnings("unused")
 	public void actionPerformed(ActionEvent e) {
-		for (IMobile obj : this.Armobile){
+		int m = Armobile.size();
+		for (int p = 0 ; p < m ; p++){
+			IMobile obj = Armobile.get(p);
 			obj.move();
-			repaint();
+			if (obj == null) {
+				p--;
+				m--;
+			}
 		}
-		
+		repaint();
 	}
 
 	public void addArmobile(IMobile mobile){

@@ -17,6 +17,7 @@ public class Monster3 extends Mobile{
 	private int x;
 	private int y;
 	private IModel model;
+	private Lorann lorann;
 
 	Permeability perm = Permeability.MONSTER;
 
@@ -27,6 +28,7 @@ public class Monster3 extends Mobile{
 		this.model = model;
 		this.Arimages = this.model.getArimages();
 		this.Armobile = this.model.getArmobile();
+		this.lorann = (Lorann) this.Armobile.get(0);
 		this.x = x;
 		this.y = y;
 	}
@@ -42,6 +44,15 @@ public class Monster3 extends Mobile{
 		}
 		
 	});
+	
+	public void monsterDie() {
+		try {
+			this.model.getArmobile().remove(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public int getX() {
 		return x;
@@ -70,136 +81,233 @@ public class Monster3 extends Mobile{
 
 
 public void move() {
-	if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() < this.y))
-
-		for (IElement obj : this.Arimages) {
-			
-			if(this.model.checkBump(this.getX()-1, this.getY()-1) == Permeability.PENETRABLE){
-					this.setX(getX() - 1);
-					this.setY(getY() - 1);
-					break;
-				
-			}
-		}
-
-	/*
-	 * Upper-right
-	 */
-
-	if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() < this.y)) {
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX()+1, this.getY()-1) == Permeability.PENETRABLE) {
-					this.setX(getX() + 1);
-					this.setY(getY() - 1);
-					break;
-				}
-			
-		}
-	}
-
-	/*
-	 * Lower-left
-	 */
-
-	else if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() > this.y)) {
-
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX()-1, this.getY()+1) == Permeability.PENETRABLE) {
-					this.setX(getX() - 1);
-					this.setY(getY() + 1);
-					break;
-				
-			}
-		}
-	}
-
-	/*
-	 * Lower-right
-	 */
-
-	else if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() > this.y)) {
-
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX()+1, this.getY()+1) == Permeability.PENETRABLE) {
-					this.setX(getX() + 1);
-					this.setY(getY() + 1);
-					break;
-				
-			}
-		}
-	}
-
-	/*
-	 * Left
-	 */
-
-	else if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() == this.y)) {
-
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX()-1, this.getY()) == Permeability.PENETRABLE) {
-					this.setX(getX() - 1);
-					break;
-				}
-			
-		}
-	}
-
-	/*
-	 * Right
-	 */
-
-	else if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() == this.y)) {
-
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.PENETRABLE) {
-					this.setX(getX() + 1);
-					break;
-				}
-			
-		}
-	}
-
-	/*
-	 * Up
-	 */
-
-	else if ((this.Armobile.get(0).getX() == this.x) && (this.Armobile.get(0).getY() < this.y)) {
-
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX(), this.getY()-1) == Permeability.PENETRABLE) {
-					this.setY(getY() - 1);
-					break;
-				}
-			}
 		
-	}
+		if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
+			try {
+				this.model.getArmobile().remove(this);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		/*
+		 * Upper-left
+		 */
 
-	/*
-	 * Down
-	 */
+		if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() < this.y))
 
-	else if ((this.Armobile.get(0).getX() == this.x) && (this.Armobile.get(0).getY() > this.y)) {
+			for (IElement obj : this.Arimages) {
+				
+				if(this.model.checkBump(this.getX()-1, this.getY()-1) == Permeability.PENETRABLE){
+						this.setX(getX() - 1);
+						this.setY(getY() - 1);
+						break;			
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()-1) == Permeability.CHARACTER) {
+					this.setX(getX() - 1);
+					this.setY(getY() - 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
 
-		for (IElement obj : this.Arimages) {
-			if (this.model.checkBump(this.getX(), this.getY()+1) == Permeability.PENETRABLE) {
-					this.setY(getY() + 1);
-					break;
+		/*
+		 * Upper-right
+		 */
+
+		if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() < this.y)) {
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX()+1, this.getY()-1) == Permeability.PENETRABLE) {
+						this.setX(getX() + 1);
+						this.setY(getY() - 1);
+						break;
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()-1) == Permeability.CHARACTER) {
+					this.setX(getX() + 1);
+					this.setY(getY() - 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()+1,this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
 				}
 			}
 		}
-	
 
-	else {
-	}
-	if (this.model.checkBump(this.getX(), this.getY()) == Permeability.SPELL) {
-		try {
-			this.model.getArmobile().remove(this);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		/*
+		 * Lower-left
+		 */
+
+		else if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() > this.y)) {
+
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX()-1, this.getY()+1) == Permeability.PENETRABLE) {
+						this.setX(getX() - 1);
+						this.setY(getY() + 1);
+						break;
+					
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()+1) == Permeability.CHARACTER) {
+					this.setX(getX() - 1);
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()+1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
+		}
+
+		/*
+		 * Lower-right
+		 */
+
+		else if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() > this.y)) {
+
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX()+1, this.getY()+1) == Permeability.PENETRABLE) {
+						this.setX(getX() + 1);
+						this.setY(getY() + 1);
+						break;
+					
+				}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()+1) == Permeability.CHARACTER) {
+					this.setX(getX() + 1);
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()+1,this.getY()+1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
+		}
+
+		/*
+		 * Left
+		 */
+
+		else if ((this.Armobile.get(0).getX() < this.x) && (this.Armobile.get(0).getY() == this.y)) {
+
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX()-1, this.getY()) == Permeability.PENETRABLE) {
+						this.setX(getX() - 1);
+						break;
+					}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()-1,this.getY()) == Permeability.CHARACTER) {
+						this.setX(getX() - 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()-1,this.getY()) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
+		}
+
+		/*
+		 * Right
+		 */
+
+		else if ((this.Armobile.get(0).getX() > this.x) && (this.Armobile.get(0).getY() == this.y)) {
+
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.PENETRABLE) {
+						this.setX(getX() + 1);
+						break;
+					}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.CHARACTER) {
+						this.setX(getX() + 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX()+1,this.getY()) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
+		}
+
+		/*
+		 * Up
+		 */
+
+		else if ((this.Armobile.get(0).getX() == this.x) && (this.Armobile.get(0).getY() < this.y)) {
+
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX(), this.getY()-1) == Permeability.PENETRABLE) {
+						this.setY(getY() - 1);
+						break;
+					}
+			}
+			
+			for (IMobile obj : this.Armobile) {
+				if (this.model.checkBump(this.getX(),this.getY()-1) == Permeability.CHARACTER) {
+						this.setY(getY() - 1);
+						this.model.reloadMap();
+						break;
+					}
+				else if (this.model.checkBump(this.getX(),this.getY()-1) == Permeability.SPELL) {
+					this.lorann.destroySpell();
+					this.monsterDie();
+				}
+			}
+			
+		}
+
+		/*
+		 * Down
+		 */
+		
+		else if ((this.Armobile.get(0).getX() == this.x) && (this.Armobile.get(0).getY() > this.y)) {
+			for (IElement obj : this.Arimages) {
+				if (this.model.checkBump(this.getX(), this.getY()+1) == Permeability.PENETRABLE) {
+						this.setY(getY() + 1);
+						break;
+					}
+				}
+		}
+		
+		for (IMobile obj : this.Armobile) {
+			if (this.model.checkBump(this.getX(),this.getY()+1) == Permeability.CHARACTER) {
+					this.setY(getY() + 1);
+					this.model.reloadMap();
+					break;
+				}
+			else if (this.model.checkBump(this.getX(),this.getY()+1) == Permeability.SPELL) {
+				this.lorann.destroySpell();
+				this.monsterDie();
+			}
 		}
 	}
-}
 
 public void launchSpell(char c) {
 	// TODO Auto-generated method stub

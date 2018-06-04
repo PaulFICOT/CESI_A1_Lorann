@@ -30,7 +30,7 @@ import model.VBone;
 public class Model extends Observable implements IModel, IMobile, IElement {
 
 		int x;
-		int y;
+		int y; 
 		int delay = 0;
 		int period = 0;
 		int lvl;
@@ -59,28 +59,28 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 			this.Arimages = new ArrayList<IElement>();
 			this.Armobile = new ArrayList<IMobile>();
 			this.lvl = lvl;
-
+			Lorann lorann ;
 			switch (lvl) { //initializing Lorann and possible monsters on the map
 			case 1:
-				Lorann lorann1 = new Lorann(13, 7, this);
-				Armobile.add(0, lorann1);
+				lorann = new Lorann(13, 7, this);
+				Armobile.add(0, lorann);
 
 				break;
 			case 2:
 				// add Loran :
-				Lorann lorann2 = new Lorann(13, 7, this);
-				Armobile.add(0, lorann2);
+				lorann = new Lorann(13, 7, this);
+				Armobile.add(0, lorann);
 
 				// add the monster (4,19,"M"),
-				Monster1 monster1 = new Monster1(19, 4, this);
+				Monster1 monster1 = new Monster1(16, 3, this);
 				Armobile.add(monster1);
 
 				break;
 
 			case 3:
 				// add Loran :
-				Lorann lorann3 = new Lorann(15, 9, this);
-				Armobile.add(0, lorann3);
+				lorann = new Lorann(15, 9, this);
+				Armobile.add(0, lorann);
 
 				// add the monsters:
 				Monster4 monster2 = new Monster4(19, 4, this);
@@ -96,8 +96,8 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 			case 4:
 				// add Loran :
-				Lorann lorann4 = new Lorann(11, 1, this);
-				Armobile.add(0, lorann4);
+				lorann = new Lorann(11, 1, this);
+				Armobile.add(0, lorann);
 
 				// add the monsters:
 				Monster4 monster5 = new Monster4(7, 9, this);
@@ -110,8 +110,8 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 			case 5:
 				// add Loran :
-				Lorann lorann5 = new Lorann(18, 6, this);
-				Armobile.add(0, lorann5);
+				lorann = new Lorann(18, 6, this);
+				Armobile.add(0, lorann);
 
 				// add the monsters:
 				Monster3 monster7 = new Monster3(8, 6, this);
@@ -191,23 +191,20 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 			return this.Arimages;
 
 		}
+		
+		public void reloadMap() {
+			try {
+				this.createMap(this.getLvl());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		//Check bump between element
 		public Permeability checkBump(int x, int y) {
-
+			
 			Permeability permBump = null;
-			for (IMobile obj2 : Armobile) {
-
-				if ((obj2.getX() == x) && (obj2.getY() == y)) {
-					if (obj2.getPerm() == Permeability.MONSTER) {
-						this.permBump = Permeability.MONSTER;
-					} else if (obj2.getPerm() == Permeability.CHARACTER) {
-						this.permBump = Permeability.CHARACTER;
-					} else if (obj2.getPerm() == Permeability.SPELL) {
-						this.permBump = Permeability.SPELL;
-					}
-				}
-			}
 			for (IElement obj : Arimages) {
 
 				if ((obj.getX() == x) && (obj.getY() == y)) {
@@ -217,6 +214,17 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 						this.permBump = Permeability.PENETRABLE;
 					} else if (obj.getPerm() == Permeability.BLOCKING) {
 						this.permBump = Permeability.BLOCKING;
+					}
+				}
+			}
+			for (IMobile obj2 : Armobile) {
+				if ((obj2.getX() == x) && (obj2.getY() == y)) {
+					if (obj2.getPerm() == Permeability.MONSTER) {
+						this.permBump = Permeability.MONSTER;
+					} else if (obj2.getPerm() == Permeability.CHARACTER) {
+						this.permBump = Permeability.CHARACTER;
+					} else if (obj2.getPerm() == Permeability.SPELL) {
+						this.permBump = Permeability.SPELL;
 					}
 				}
 			}
@@ -348,6 +356,12 @@ public class Model extends Observable implements IModel, IMobile, IElement {
 
 		public void delArmobile(IMobile mobile) {
 			this.Armobile.remove(mobile);
+		}
+
+		@Override
+		public void doNothing() {
+			// TODO Auto-generated method stub
+			
 		}
 
 		

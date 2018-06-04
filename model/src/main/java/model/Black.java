@@ -38,7 +38,7 @@ public class Black extends Background{
 	}
 
 	public BufferedImage Image() throws IOException {
-		BufferedImage black = ImageIO.read(new File("C:\\\\Users\\\\vince\\\\git\\\\Loran\\\\black.png"));
+		BufferedImage black = ImageIO.read(new File("C:\\Users\\vince\\git\\Loran\\black.png"));
 		return black;
 
 	}

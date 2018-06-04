@@ -23,7 +23,8 @@ public class ViewFacade implements IView, Runnable {
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) { //KeyEvent which get back the enter
 			
 		switch (keyCode) {
-		case KeyEvent.VK_RIGHT: //VK_XXXX mean the arrows above the keyboard
+		
+		case KeyEvent.VK_RIGHT: //VK_XXXX mean the arrows on the keyboard
 			return ControllerOrder.Right;
 			
 		case KeyEvent.VK_LEFT:
