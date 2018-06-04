@@ -21,4 +21,5 @@ public interface IMobile {
 	
 	BufferedImage Image() throws IOException;
 	String getName();
+	void doNothing();
 }

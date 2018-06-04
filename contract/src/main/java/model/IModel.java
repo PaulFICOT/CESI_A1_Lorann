@@ -30,6 +30,7 @@ public interface IModel {
 	List<IElement> getArimages() throws SQLException;
 
 	List<IMobile> getArmobile() throws SQLException;
+	void reloadMap();
 
 Permeability checkBump(int x, int y);
 	
